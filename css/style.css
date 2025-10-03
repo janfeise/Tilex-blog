@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* “fade-in”（淡入）动画：
+   元素从完全透明（opacity: 0）逐渐变为完全不透明（opacity: 1） */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* “slide-up”（向上滑入）动画：
+   元素从下方 5rem 位置逐渐移动到原始位置，同时从透明过渡到不透明 */
+@keyframes slide-up {
+  0% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=style.css.map */

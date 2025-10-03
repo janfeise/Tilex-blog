@@ -1,0 +1,52 @@
+@use "../abstracts" as a;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  //   /**
+  //   * 默认情况下
+  //   * font-size: 100%  为 16px
+  //   * font-size: 62.5% 为 10px，作用是：1rem = 10px
+  //   * 示例：
+  //   *     - padding: 4rem; 即40px
+  //   */
+  //   @include a.respond(tab-land) {
+  //     /* 竖屏平板：width < 1200px */
+  //     /* 竖屏平板：1rem = 9px */
+  //     font-size: 56.25%;
+  //   }
+
+  //   @include a.respond(tab-port) {
+  //     /* 横屏平板： width < 900px */
+  //     /* 横屏平板：1rem = 8px */
+  //     font-size: 50%;
+  //   }
+
+  //   /* 特殊断点 */
+  //   @include a.respond(850px) {
+  //     font-size: 45%;
+  //   }
+
+  //   @include a.respond(phone) {
+  //     /* 手机：width < 600px */
+  //     /* 手机：1rem = 4.8px */
+  //     font-size: 34%;
+  //   }
+
+  //   @include a.respond(big-desktop) {
+  //     /* 大尺寸：width > 1800 */
+  //     /* 大尺寸：1rem = 12px */
+  //     font-size: 75%;
+  //   }
+}
+
+body {
+  box-sizing: border-box;
+}
