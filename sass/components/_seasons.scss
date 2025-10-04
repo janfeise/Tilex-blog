@@ -64,8 +64,48 @@
     transform: translate(-50%);
   }
 
+  &__spring {
+    background-image: linear-gradient(
+        to bottom right,
+        rgba(126, 213, 111, 0.5),
+        rgba(40, 130, 133, 0.5)
+      ),
+      url("../../assets/pic/seasons-春.jpg");
+  }
+
   &__summer {
     background-image: url("../../assets/pic/seasons-夏.png");
     filter: saturate(130%);
+  }
+
+  &__autumn {
+    // 背景图片模糊，但文字保持清晰
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+
+      background-image: linear-gradient(
+          to bottom right,
+          rgba(255, 253, 208, 0.2),
+          rgba(255, 191, 0, 0.2)
+        ),
+        url("../../assets/pic/seasons-秋.jpg");
+      background-position: center;
+      filter: blur(1px);
+    }
+  }
+
+  &__winter {
+    background-image: linear-gradient(
+        to bottom right,
+        rgba(255, 253, 255, 0.2),
+        rgba(255, 191, 255, 0.2)
+      ),
+      url("../../assets/pic/seasons-冬.png");
   }
 }

@@ -22,7 +22,7 @@ export function formatDate(date, format = "YYYY-MM-DD") {
   const pad = (n) => String(n).padStart(2, "0");
 
   const year = d.getFullYear();
-  const month = pad(d.getMonth());
+  const month = pad(d.getMonth() + 1);
   const day = pad(d.getDate());
   const hours = pad(d.getHours());
   const minutes = pad(d.getMinutes());

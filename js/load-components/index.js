@@ -9,7 +9,7 @@
 
 import { headerSeasonsContainer } from "../dom/headerDom.js";
 import { loadComponents } from "../utils/loadComponent.js";
-import { initSeasonsDate } from "../components/seasons.js";
+import { initSeasons } from "../components/seasons.js";
 
 // 页面 DOM 加载完成后执行
 window.addEventListener("DOMContentLoaded", () => {
@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
     {
       container: headerSeasonsContainer,
       name: "seasons",
-      initFuc: initSeasonsDate,
+      initFuc: initSeasons,
     },
   ]);
 });
