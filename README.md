@@ -129,7 +129,132 @@ $primary-color: #3498db;
 
 ------
 
+## DOM元素获取
 
+### 1. 获取 DOM 的逻辑
+
+#### 情况 A：页面静态存在的 DOM
+
+- 当某个 DOM 元素在页面加载时就已经存在（不需要动态插入）
+- 获取方式：直接使用 `querySelector` 或 `getElementById` 等方法即可
+
+```js
+const headerNavContainer = document.querySelector(".header__nav-container");
+```
+
+#### 情况 B：动态插入的组件
+
+- 当组件 HTML 是动态插入的，不能在页面初始加载时直接获取，因为此时还没有加载dom元素，如果此时获取结果为：`null`
+- 原因：组件的 DOM 在初始页面加载时还不存在
+- 解决方案：
+	1. 确定组件的插入位置。组件必须插入到页面中已有的静态 DOM 元素上（先有插入位置，才能插入组件）。
+	2. 动态加载组件后，可通过 `container.querySelector()` 获取组件内部的 DOM 元素进行操作。
+
+```js
+function initSeasonsDate(container) {
+  const el = container.querySelector(".seasons__date");
+  if (el) {
+    el.textContent = formatDate(new Date(), "「YYYY/MM/DD」");
+  } else {
+    console.warn(".seasons__date 元素未找到");
+  }
+}
+```
+
+我帮你把示例逻辑润色得更清晰、条理更顺畅，并稍微优化了注释风格，使其更易读、易理解：
+
+------
+
+### 2. 示例：动态插入 `seasons` 组件
+
+#### 1. 确定插入位置
+
+在 HTML 中为 `seasons` 组件预留一个静态 DOM 容器：
+
+```html
+<!-- index.html -->
+<header class="header">
+    <div class="header__nav-container"></div>
+    <div class="header__seasons-container"></div> <!-- seasons 插入位置 -->
+</header>
+```
+
+在 JS 中直接获取该容器：
+
+```js
+// headerDom.js
+const headerSeasonsContainer = document.querySelector(
+  ".header__seasons-container"
+);
+```
+
+------
+
+#### 2. 动态加载组件
+
+监听 `DOMContentLoaded` 后加载组件：
+
+```js
+// load-components/index.js
+window.addEventListener("DOMContentLoaded", () => {
+  loadComponents([
+    {
+      container: headerSeasonsContainer,
+      name: "seasons",
+      initFuc: initSeasonsDate,
+    },
+  ]);
+});
+```
+
+------
+
+#### 3. 初始化函数
+
+组件加载完成后，操作组件内部 DOM：
+
+```js
+// components/season.js
+function initSeasonsDate(container) {
+  const el = container.querySelector(".seasons__date");
+  if (el) {
+    el.textContent = formatDate(new Date(), "「YYYY/MM/DD」");
+  } else {
+    console.warn(".seasons__date 元素未找到");
+  }
+}
+```
+
+------
+
+#### 4. 组件加载器
+
+统一处理组件动态加载和初始化：
+
+```js
+const loadComponents = async (components = []) => {
+  for (const { container, name, initFuc } of components) {
+		// 插入组件的代码，插入后对组件进行初始化
+      
+        initFuc(container); // 关键点：确保组件加载完再执行初始化, container为传入的参数：headerSeasonsContainer
+      
+      	// 其它代码
+  }
+};
+```
+
+### 3. 总结
+
+| 情况               | DOM 获取方式                   | 说明                                               |
+| ------------------ | ------------------------------ | -------------------------------------------------- |
+| 静态 DOM           | `document.querySelector(...)`  | 页面加载时就存在                                   |
+| 动态插入组件的 DOM | `container.querySelector(...)` | 等组件插入后再获取，`container` 是插入位置的父元素 |
+
+**核心思路**：
+
+> “插入位置的容器 DOM 一定存在 → 动态插入组件 → 在容器内获取组件 DOM → 初始化操作”
+
+------
 
 
 
