@@ -42,10 +42,71 @@ html {
 
 body {
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 7.2rem;
+  color: #eee;
+  font-size: 1.6rem;
+  letter-spacing: 5px;
+  background-color: transparent;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 100;
+}
+.nav__wrap {
+  height: 100%;
+  padding: 4rem 25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav__left {
+  display: flex;
+}
+.nav__right:hover {
+  cursor: pointer;
+}
+.nav__logo {
+  letter-spacing: normal;
+  font-size: 3rem;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+  margin-right: 20rem;
+}
+.nav__logo:hover {
+  cursor: pointer;
+}
+.nav__logo--colorful {
+  padding: 1rem;
+  background-color: skyblue;
+  border-radius: 10px;
+  margin-right: -1rem;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+.nav__item:not(:last-child) {
+  margin-right: 5rem;
+}
+.nav__link:link, .nav__link:visited {
+  font-size: 2rem;
+  font-weight: 400;
+  color: inherit;
+  text-decoration: none;
 }
 
 .seasons {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   color: #f7f7f7;
   font-optical-sizing: auto;
@@ -96,7 +157,8 @@ body {
   position: absolute;
   bottom: 8%;
   left: 50%;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: bold;
   letter-spacing: 2rem;
   transform: translate(-50%);
 }
@@ -121,6 +183,12 @@ body {
 }
 .seasons__winter {
   background-image: linear-gradient(to bottom right, rgba(255, 253, 255, 0.2), rgba(255, 191, 255, 0.2)), url("../../assets/pic/seasons-冬.png");
+}
+
+.header {
+  width: 100%;
+  height: 100vh;
+  position: relative;
 }
 
 /*# sourceMappingURL=style.css.map */

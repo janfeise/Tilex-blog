@@ -7,7 +7,10 @@
  * 3. 使用 `fetch` 异步加载组件 HTML 内容并插入到指定的 DOM 容器中。
  */
 
-import { headerSeasonsContainer } from "../dom/headerDom.js";
+import {
+  headerSeasonsContainer,
+  headerNavContainer,
+} from "../dom/headerDom.js";
 import { loadComponents } from "../utils/loadComponent.js";
 import { initSeasons } from "../components/seasons.js";
 
@@ -19,6 +22,10 @@ window.addEventListener("DOMContentLoaded", () => {
       container: headerSeasonsContainer,
       name: "seasons",
       initFuc: initSeasons,
+    },
+    {
+      container: headerNavContainer,
+      name: "nav",
     },
   ]);
 });
