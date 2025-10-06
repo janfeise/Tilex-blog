@@ -20,7 +20,7 @@
 
 ## 路由配置系统
 
-路由配置系统负责根据当前页面路径，自动加载对应的组件，它解决了多页面应用中"不同页面需要加载不同组件"的问题。
+路由配置系统负责根据当前页面路径，自动加载对应的组件；它解决了多页面应用中"不同页面需要加载不同组件"的问题。
 
 ### 流程
 
@@ -30,7 +30,7 @@
 
 **功能**：
 
-- 统一管理 <u>所有页面</u> 的组件配置
+- 统一管理所有页面的组件配置
 - 自动识别当前页面并加载对应组件
 - 支持公共组件和页面特定组件的分离
 - 可动态扩展新路由
@@ -188,6 +188,17 @@ const pageSpecificComponents = {
 };
 ```
 
+**第四步**：在入口文件中调用
+
+```javascript
+// main.js
+import { loadPageComponents } from "./router.js";
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadPageComponents();  // 自动识别当前页面并加载组件
+});
+```
+
 ------
 
 ### 高级功能
@@ -267,8 +278,38 @@ console.log(config);  // 输出该页面的所有组件配置
 ```javascript
 {
   container: HTMLElement,    // 必需：组件插入的容器
-  name: string,             // 必需：组件文件名（不含 .html）
+  name: string,             // 必需：组件 HTML 文件名（不含 .html 后缀）
   initFuc: Function,        // 可选：初始化函数
+}
+```
+
+**关于 `name` 属性的说明**：
+
+- `name` 只需要填写组件 HTML 文件的文件名（不含 `.html` 后缀）
+- 所有<u>组件 HTML 文件</u>统一存放在 `../../components/` 目录下
+- 系统会自动拼接完整路径：`BASE_PATH + name + ".html"`
+
+**示例**：
+
+```javascript
+// ✅ 正确：只传文件名
+{
+  container: headerNavContainer,
+  name: "nav",              // 实际加载: ../../components/nav.html
+  initFuc: initNav,
+}
+
+// ✅ 正确：文件名可以包含连字符
+{
+  container: blogWrapper,
+  name: "blog-article",     // 实际加载: ../../components/blog-article.html
+  initFuc: initBlog,
+}
+
+// ❌ 错误：不要包含路径或后缀
+{
+  name: "../../components/nav.html",  // ❌ 多余
+  name: "nav.html",                   // ❌ 不需要后缀
 }
 ```
 
