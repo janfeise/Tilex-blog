@@ -1,5 +1,7 @@
 import { getArticles } from "../utils/api.js";
-import { findAllElements, findRequiredElements } from "./../utils/findDom.js";
+import { findAllElements } from "./../utils/findDom.js";
+
+const BASE_URL = "/pages/article.html";
 
 /**
  * 渲染博客文章列表
@@ -16,84 +18,84 @@ function renderBlogPosts(container) {
       title: "文章标题 1",
       date: "2025-10-05",
       content: "这是第一篇文章的内容。",
-      url: "/posts/1",
+      url: "/pages/article.html?1",
     },
     {
       id: 2,
       title: "文章标题 2",
       date: "2025-10-06",
       content: "这是第二篇文章的内容。",
-      url: "/posts/2",
+      url: "/article/2",
     },
     {
       id: 3,
       title: "文章标题 3",
       date: "2025-10-07",
       content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/posts/3",
+      url: "/article/3",
     },
     {
       id: 1,
       title: "文章标题 1",
       date: "2025-10-05",
       content: "这是第一篇文章的内容。",
-      url: "/posts/1",
+      url: "/article/1",
     },
     {
       id: 2,
       title: "文章标题 2",
       date: "2025-10-06",
       content: "这是第二篇文章的内容。",
-      url: "/posts/2",
+      url: "/article/2",
     },
     {
       id: 3,
       title: "文章标题 3",
       date: "2025-10-07",
       content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/posts/3",
+      url: "/article/3",
     },
     {
       id: 1,
       title: "文章标题 1",
       date: "2025-10-05",
       content: "这是第一篇文章的内容。",
-      url: "/posts/1",
+      url: "/article/1",
     },
     {
       id: 2,
       title: "文章标题 2",
       date: "2025-10-06",
       content: "这是第二篇文章的内容。",
-      url: "/posts/2",
+      url: "/article/2",
     },
     {
       id: 3,
       title: "文章标题 3",
       date: "2025-10-07",
       content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/posts/3",
+      url: "/article/3",
     },
     {
       id: 1,
       title: "文章标题 1",
       date: "2025-10-05",
       content: "这是第一篇文章的内容。",
-      url: "/posts/1",
+      url: "/article/1",
     },
     {
       id: 2,
       title: "文章标题 2",
       date: "2025-10-06",
       content: "这是第二篇文章的内容。",
-      url: "/posts/2",
+      url: "/article/2",
     },
     {
       id: 3,
       title: "文章标题 3",
       date: "2025-10-07",
       content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/posts/3",
+      url: "/article/3",
     },
   ];
 
@@ -127,7 +129,7 @@ function renderBlogPosts(container) {
     const btnGoto = clone.querySelector(".blog__goto");
     if (btnGoto) {
       btnGoto.addEventListener("click", () => {
-        window.location.href = post.url;
+        window.location.href = `${BASE_URL}?id=${post.id}`;
       });
     }
 

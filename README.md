@@ -18,6 +18,63 @@
 
 ---
 
+目录
+
+```pgsql
+E:.  
+|   index.html               -- 首页
+|  
++---assets                   -- 存放图片、图标、字体等静态资源
+|   +---fonts                 -- 字体文件
+|   +---icon                  -- 图标文件
+|   \---pic                   -- 图片资源
+|   
++---components               -- 可复用组件
+|       blog-article.html     -- 博客页面的文章组件
+|       footer.html           -- 页脚组件
+|       nav.html              -- 导航栏组件
+|       seasons.html          -- 季节相关组件
+|   
++---css                       -- 存放各类CSS文件
+|       style.css            -- 全局样式，有scss自动生成
+|       style.css.map        -- CSS映射文件，用于调试  
+|   
++---js                        -- 存放各类JS文件
+|   main.js                  -- 项目主要逻辑文件  
+|   router.js                -- 路由控制文件：控制各个页面加载的组件
+|   +---components            -- 组件相关JS
+|   |       index.js          -- 组件入口逻辑
+|   |       nav.js            -- 导航栏逻辑
+|   |       seasons.js        -- 季节组件逻辑
+|   +---dom                   -- DOM操作相关JS
+|   |       blogDom.js        -- 博客页面DOM操作
+|   |       headerDom.js      -- 页头DOM操作
+|   |       index.js          -- 首页DOM操作
+|   +---load-components       -- 加载组件逻辑
+|   |       index.js          -- 组件加载入口
+|   +---pages                 -- 页面逻辑JS
+|   |       blog.js           -- 博客页面逻辑
+|   \---utils                 -- 工具函数
+|           api.js            -- 接口请求封装
+|           date.js           -- 日期处理工具
+|           findDom.js        -- DOM查询工具
+|           loadComponent.js  -- 组件加载工具
+|           request.js        -- 通用请求函数
+|   
++---pages                     -- 存放HTML页面
+|       blog.html             -- 博客页面
+|   
+\---sass                      -- Sass源码文件
+    +---abstracts            -- 抽象类（变量、函数、混入等）
+    +---base                 -- 基础样式（reset、typography等）
+    +---components           -- 组件样式
+    +---layout               -- 布局相关样式
+    +---pages                -- 页面样式
+    \---themes               -- 主题样式
+```
+
+---
+
 ## 路由配置系统
 
 路由配置系统负责根据当前页面路径，自动加载对应的组件；它解决了多页面应用中"不同页面需要加载不同组件"的问题。

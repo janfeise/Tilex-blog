@@ -6,13 +6,14 @@
  * 2. 使用现有的 loadComponents 工具函数来加载组件
  * 3. 自动识别当前页面路径并加载对应组件
  */
-
+import { articleContainer } from "./dom/articlDom.js";
 import { blogWrapper } from "./dom/blogDom.js";
 import { headerSeasonsContainer, headerNavContainer } from "./dom/headerDom.js";
 import { initSeasons } from "./components/seasons.js";
 import { initNav } from "./components/nav.js";
 import { initBlog } from "./pages/blog.js";
 import { loadComponents } from "./utils/loadComponent.js";
+import { initArticle } from "./pages/article.js";
 
 /**
  * 公共组件配置（所有页面都需要的组件）
@@ -44,6 +45,14 @@ const pageSpecificComponents = {
       container: blogWrapper,
       name: "blog-article",
       initFuc: initBlog,
+    },
+  ],
+
+  "/pages/article.html": [
+    {
+      container: articleContainer,
+      name: "article-detail",
+      initFuc: initArticle,
     },
   ],
 };
