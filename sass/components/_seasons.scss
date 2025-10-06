@@ -19,6 +19,7 @@
   }
 
   &__content {
+    height: 100%;
     &:hover {
       cursor: default;
     }
@@ -31,6 +32,10 @@
     left: 45%;
     font-size: 8rem;
     margin-right: 2rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__line {
@@ -54,16 +59,30 @@
     overflow: hidden;
     text-overflow: clip;
     height: 33rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  &__date {
+  &__date-wrapper {
     position: absolute;
     bottom: 8%;
     left: 50%;
+    height: auto;
+    transform: translate(-50%, 0);
+  }
+
+  &__date {
+    display: inline-block;
     font-size: a.$font-size-small;
     font-weight: bold;
     letter-spacing: 2rem;
-    transform: translate(-50%);
+    opacity: 0;
+
+    &:hover {
+      cursor: default;
+    }
   }
 
   &__spring {

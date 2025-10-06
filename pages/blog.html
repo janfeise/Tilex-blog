@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- 页面：博客文章页 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script type="module" src="../js/main.js" defer></script>
+    <title>文章</title>
+  </head>
+  <body class="blog">
+    <header class="header">
+      <div class="header__nav-container"></div>
+      <div class="header__seasons-container"></div>
+    </header>
+    <main>
+      <div class="blog__container">
+        <div class="blog__left">
+          <div class="blog__grid">
+            <template id="blog-template">
+              <article class="blog__wrap">
+                <header class="blog__header">
+                  <h1 class="blog__title">文章标题 1</h1>
+                  <time class="blog__date" datetime="2025-10-05"
+                    >2025-10-05</time
+                  >
+                </header>
+                <section class="blog__content">
+                  <p>这是第一篇文章的内容，简洁明了，便于阅读。</p>
+                  <button class="blog__goto">阅读更多</button>
+                </section>
+              </article>
+
+              <article class="blog__wrap">
+                <header class="blog__header">
+                  <h1 class="blog__title">文章标题 2</h1>
+                  <time class="blog__date" datetime="2025-10-04"
+                    >2025-10-04</time
+                  >
+                </header>
+                <section class="blog__content">
+                  <p>这是第二篇文章的内容，包含一些简介和要点。</p>
+                  <button class="blog__goto">阅读更多</button>
+                </section>
+              </article>
+
+              <article class="blog__wrap">
+                <header class="blog__header">
+                  <h1 class="blog__title">文章标题 3</h1>
+                  <time class="blog__date" datetime="2025-10-03"
+                    >2025-10-03</time
+                  >
+                </header>
+                <section class="blog__content">
+                  <p>这是第三篇文章的内容，简单易读。</p>
+                  <button class="blog__goto">阅读更多</button>
+                </section>
+              </article>
+
+              <article class="blog__wrap">
+                <header class="blog__header">
+                  <h1 class="blog__title">文章标题 4</h1>
+                  <time class="blog__date" datetime="2025-10-02"
+                    >2025-10-02</time
+                  >
+                </header>
+                <section class="blog__content">
+                  <p>
+                    这是第四篇文章的内容，可以继续添加更多段落。Lorem ipsum
+                    dolor sit amet consectetur, adipisicing elit. Perferendis
+                    tenetur illum nostrum aliquam temporibus quas reiciendis
+                    minima magni. Quidem dolor quod dolore corporis eaque qui
+                    eum maxime veniam ullam in.
+                  </p>
+                  <button class="blog__goto">阅读更多</button>
+                </section>
+              </article>
+            </template>
+          </div>
+        </div>
+
+        <div class="blog__right">右侧</div>
+      </div>
+    </main>
+  </body>
+</html>

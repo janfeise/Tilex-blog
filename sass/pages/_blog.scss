@@ -1,0 +1,90 @@
+@use "../abstracts/" as a;
+
+body.blog .header {
+  height: max-content;
+}
+
+body.blog {
+  background-color: a.$color-bg;
+}
+
+body.blog .nav {
+  color: a.$color-grey-dark-2;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
+}
+
+.blog {
+  padding-bottom: 20rem;
+
+  &__container {
+    padding: 15rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+  }
+
+  &__left {
+    flex: 1; /* 占据剩余空间 */
+    border-right: dashed 1px a.$color-grey-dark;
+    padding-right: 5rem;
+
+    height: 70rem;
+  }
+
+  &__right {
+    flex: 0 0 15%; /* 不增长，不缩小，固定宽度30% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 每行3列
+    gap: 6rem 2rem;
+  }
+
+  &__wrap {
+    background-color: a.$color-grey-light;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__date {
+  }
+
+  &__content {
+    font-size: 1.6rem;
+
+    & > p {
+      height: 7rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; // 显示3行
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__goto {
+    display: block;
+    margin-left: auto;
+  }
+}

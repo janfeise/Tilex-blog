@@ -21,3 +21,16 @@
     opacity: 1;
   }
 }
+
+/* “slide-down”（向下滑入）动画：
+   元素从上方 5rem 位置逐渐移动到原始位置，同时从透明过渡到不透明 */
+@keyframes slide-down {
+  0% {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

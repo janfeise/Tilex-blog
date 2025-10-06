@@ -1,4 +1,5 @@
 import { formatDate } from "../utils/date.js";
+import { findRequiredElement, safeUpdate } from "../utils/findDom.js";
 
 /**
  * 季节配置映射表
@@ -44,6 +45,7 @@ function getCurrentSeason() {
 const updateSeasonClassName = function (container) {
   // 0. 获取当前所在的季节和对应的映射表数据
   const currentSeason = getCurrentSeason();
+  // const currentSeason = "春";
   const config = SEASON_CONFIG[currentSeason];
 
   if (!config) {
@@ -52,11 +54,7 @@ const updateSeasonClassName = function (container) {
   }
 
   // 1. 找到目标元素
-  const el = container.querySelector(".seasons__container");
-  if (!el) {
-    console.error("未找到 .seasons__container 元素！");
-    return;
-  }
+  const el = findRequiredElement(container, ".seasons__container");
 
   // 2. 移除所有的季节类名
   Object.values(SEASON_CONFIG).forEach(({ className }) => {
@@ -67,12 +65,14 @@ const updateSeasonClassName = function (container) {
   el.classList.add(config.className);
 
   // 4.更新标题
-  const titleEl = container.querySelector(".seasons__title");
-  if (titleEl) {
+  safeUpdate(container, ".seasons__title", (titleEl) => {
     titleEl.textContent = currentSeason;
-  } else {
-    console.warn("未找到 .seasons__title 元素");
-  }
+  });
+
+  // 5. 添加淡入动画
+  safeUpdate(container, ".seasons__content", (contentEl) => {
+    contentEl.style.animation = "fade-in 1.5s ease-in-out";
+  });
 };
 
 /**
@@ -80,13 +80,10 @@ const updateSeasonClassName = function (container) {
  * @param {HTMLElement} container - 容器元素
  */
 function updateSeasonDate(container) {
-  const el = container.querySelector(".seasons__date");
-  if (!el) {
-    console.warn("未找到 .seasons__date 元素");
-    return;
-  }
+  const el = findRequiredElement(container, ".seasons__date");
 
-  console.log(formatDate(new Date(), "「YYYY/MM/DD」"));
+  el.textContent = formatDate(new Date(), "「YYYY/MM/DD」");
+  el.style.animation = "slide-up 1s ease-in-out forwards";
 }
 
 /**

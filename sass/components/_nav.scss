@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: 7.2rem;
+  height: auto;
   color: a.$color-grey;
   font-size: a.$font-size-body;
   letter-spacing: 5px;
@@ -19,19 +19,26 @@
 
   &__wrap {
     height: 100%;
-    padding: 4rem 25rem;
+    padding: 0rem 20rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
   }
 
   &__left {
-    display: flex;
   }
 
   &__right {
-    &:hover {
-      cursor: pointer;
+    & > div {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
     }
   }
 
@@ -40,7 +47,7 @@
     font-size: a.$font-size-xl;
     font-family: "Courier New", Courier, monospace;
     font-weight: bolder;
-    margin-right: 20rem;
+    margin-right: 5rem;
 
     &:hover {
       cursor: pointer;
@@ -49,30 +56,43 @@
     &--colorful {
       padding: 1rem;
       background-color: skyblue;
+      color: a.$color-grey;
       border-radius: 10px;
       margin-right: -1rem;
     }
   }
 
   &__links {
+    height: 100%;
+  }
+  &__links,
+  &__links > &__item {
     display: flex;
     align-items: center;
     list-style: none;
   }
 
   &__item {
+    padding: 3rem 1rem;
+
     &:not(:last-child) {
-      margin-right: 5rem;
+      margin-right: 3rem;
     }
   }
 
   &__link {
     &:link,
     &:visited {
+      font-family: sans-serif;
       font-size: a.$font-size-heading;
       font-weight: 400;
       color: inherit;
       text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    &--active {
+      font-weight: bolder;
     }
   }
 }

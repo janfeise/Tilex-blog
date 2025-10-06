@@ -21,6 +21,18 @@
     opacity: 1;
   }
 }
+/* “slide-down”（向下滑入）动画：
+   元素从上方 5rem 位置逐渐移动到原始位置，同时从透明过渡到不透明 */
+@keyframes slide-down {
+  0% {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 @font-face {
   font-family: "LongCang";
   src: url("../assets/fonts/LongCang-Regular.ttf") format("truetype");
@@ -52,7 +64,7 @@ body {
   left: 0;
   right: 0;
   width: 100%;
-  height: 7.2rem;
+  height: auto;
   color: #eee;
   font-size: 1.6rem;
   letter-spacing: 5px;
@@ -63,23 +75,25 @@ body {
 }
 .nav__wrap {
   height: 100%;
-  padding: 4rem 25rem;
+  padding: 0rem 20rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.nav__left {
+.nav__wrap > div {
   display: flex;
+  align-items: center;
+  height: 100%;
 }
-.nav__right:hover {
-  cursor: pointer;
+.nav__right > div:not(:last-child) {
+  margin-right: 1rem;
 }
 .nav__logo {
   letter-spacing: normal;
   font-size: 3rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: bolder;
-  margin-right: 20rem;
+  margin-right: 5rem;
 }
 .nav__logo:hover {
   cursor: pointer;
@@ -87,22 +101,34 @@ body {
 .nav__logo--colorful {
   padding: 1rem;
   background-color: skyblue;
+  color: #eee;
   border-radius: 10px;
   margin-right: -1rem;
 }
 .nav__links {
+  height: 100%;
+}
+.nav__links, .nav__links > .nav__item {
   display: flex;
   align-items: center;
   list-style: none;
 }
+.nav__item {
+  padding: 3rem 1rem;
+}
 .nav__item:not(:last-child) {
-  margin-right: 5rem;
+  margin-right: 3rem;
 }
 .nav__link:link, .nav__link:visited {
+  font-family: sans-serif;
   font-size: 2rem;
   font-weight: 400;
   color: inherit;
   text-decoration: none;
+  transition: all 0.3s;
+}
+.nav__link--active {
+  font-weight: bolder;
 }
 
 .seasons {
@@ -121,6 +147,9 @@ body {
   background-position: center;
   background-attachment: fixed;
 }
+.seasons__content {
+  height: 100%;
+}
 .seasons__content:hover {
   cursor: default;
 }
@@ -131,6 +160,9 @@ body {
   left: 45%;
   font-size: 8rem;
   margin-right: 2rem;
+}
+.seasons__title:hover {
+  cursor: pointer;
 }
 .seasons__line {
   position: absolute;
@@ -153,14 +185,25 @@ body {
   text-overflow: clip;
   height: 33rem;
 }
-.seasons__date {
+.seasons__welcome:hover {
+  cursor: pointer;
+}
+.seasons__date-wrapper {
   position: absolute;
   bottom: 8%;
   left: 50%;
+  height: auto;
+  transform: translate(-50%, 0);
+}
+.seasons__date {
+  display: inline-block;
   font-size: 1.4rem;
   font-weight: bold;
   letter-spacing: 2rem;
-  transform: translate(-50%);
+  opacity: 0;
+}
+.seasons__date:hover {
+  cursor: default;
 }
 .seasons__spring {
   background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.5), rgba(40, 130, 133, 0.5)), url("../../assets/pic/seasons-春.jpg");
@@ -189,6 +232,79 @@ body {
   width: 100%;
   height: 100vh;
   position: relative;
+}
+
+body.blog .header {
+  height: max-content;
+}
+
+body.blog {
+  background-color: #f1f1f1;
+}
+
+body.blog .nav {
+  color: #444;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
+}
+
+.blog {
+  padding-bottom: 20rem;
+}
+.blog__container {
+  padding: 15rem;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+.blog__left {
+  flex: 1; /* 占据剩余空间 */
+  border-right: dashed 1px #777;
+  padding-right: 5rem;
+  height: 70rem;
+}
+.blog__right {
+  flex: 0 0 15%; /* 不增长，不缩小，固定宽度30% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40rem;
+}
+.blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6rem 2rem;
+}
+.blog__wrap {
+  background-color: #f7f7f7;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.blog__wrap:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+.blog__header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.blog__title {
+  margin-bottom: 1rem;
+}
+.blog__content {
+  font-size: 1.6rem;
+}
+.blog__content > p {
+  height: 7rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 1rem;
+}
+.blog__goto {
+  display: block;
+  margin-left: auto;
 }
 
 /*# sourceMappingURL=style.css.map */
