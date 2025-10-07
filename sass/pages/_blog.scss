@@ -46,9 +46,9 @@ body.blog .nav {
 
   &__wrap {
     background-color: a.$color-grey-light;
-    padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
 
     &:hover {
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -57,10 +57,15 @@ body.blog .nav {
 
   &__header {
     text-align: center;
+    padding: 2rem 2rem 0;
     margin-bottom: 1rem;
   }
 
   &__title {
+    width: 100%;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-bottom: 1rem;
   }
 
@@ -69,6 +74,7 @@ body.blog .nav {
 
   &__content {
     font-size: 1.6rem;
+    padding: 0 2rem 1rem;
 
     & > p {
       height: 7rem;
@@ -84,5 +90,6 @@ body.blog .nav {
   &__goto {
     display: block;
     margin-left: auto;
+    border-top: 2px dashed a.$color-grey-dark;
   }
 }

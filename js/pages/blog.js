@@ -7,98 +7,7 @@ const BASE_URL = "/pages/article.html";
  * 渲染博客文章列表
  * @param {HTMLElement} container - 博客文章容器
  */
-function renderBlogPosts(container) {
-  // TODO: 正式使用时取消注释,启用真实API
-  // const posts = getArticles({ page: 0, size: 15 });
-
-  // 临时测试数据
-  const posts = [
-    {
-      id: 1,
-      title: "文章标题 1",
-      date: "2025-10-05",
-      content: "这是第一篇文章的内容。",
-      url: "/pages/article.html?1",
-    },
-    {
-      id: 2,
-      title: "文章标题 2",
-      date: "2025-10-06",
-      content: "这是第二篇文章的内容。",
-      url: "/article/2",
-    },
-    {
-      id: 3,
-      title: "文章标题 3",
-      date: "2025-10-07",
-      content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/article/3",
-    },
-    {
-      id: 1,
-      title: "文章标题 1",
-      date: "2025-10-05",
-      content: "这是第一篇文章的内容。",
-      url: "/article/1",
-    },
-    {
-      id: 2,
-      title: "文章标题 2",
-      date: "2025-10-06",
-      content: "这是第二篇文章的内容。",
-      url: "/article/2",
-    },
-    {
-      id: 3,
-      title: "文章标题 3",
-      date: "2025-10-07",
-      content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/article/3",
-    },
-    {
-      id: 1,
-      title: "文章标题 1",
-      date: "2025-10-05",
-      content: "这是第一篇文章的内容。",
-      url: "/article/1",
-    },
-    {
-      id: 2,
-      title: "文章标题 2",
-      date: "2025-10-06",
-      content: "这是第二篇文章的内容。",
-      url: "/article/2",
-    },
-    {
-      id: 3,
-      title: "文章标题 3",
-      date: "2025-10-07",
-      content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/article/3",
-    },
-    {
-      id: 1,
-      title: "文章标题 1",
-      date: "2025-10-05",
-      content: "这是第一篇文章的内容。",
-      url: "/article/1",
-    },
-    {
-      id: 2,
-      title: "文章标题 2",
-      date: "2025-10-06",
-      content: "这是第二篇文章的内容。",
-      url: "/article/2",
-    },
-    {
-      id: 3,
-      title: "文章标题 3",
-      date: "2025-10-07",
-      content: "这是第三篇文章的内容,展示更多文章样式。",
-      url: "/article/3",
-    },
-  ];
-
+async function renderBlogPosts(container) {
   const template = document.getElementById("blog-template");
 
   if (!template) {
@@ -109,6 +18,105 @@ function renderBlogPosts(container) {
 
   // 清空容器,避免重复渲染
   container.innerHTML = "";
+
+  // 调用接口获取所有的文章
+  let posts = [];
+  try {
+    const res = await getArticles({ all: true });
+    posts = res.data;
+  } catch (error) {
+    console.error("获取文章失败：", error);
+    container.innerHTML = "<p class='blog__empty'>文章加载失败</p>";
+    return;
+  }
+
+  // 临时测试数据
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     title: "文章标题 1文章标题 1文章标题 1文章标题 1",
+  //     date: "2025-10-05",
+  //     content:
+  //       "这是第一篇文章的内容这是第一篇文章的内容这是第一篇文章的内容这是第一篇文章的内容这是第一篇文章的内容这是第一篇文章的内容这是第一篇文章的内容这是第一篇文章的内容。",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "文章标题 2",
+  //     date: "2025-10-06",
+  //     content: "这是第二篇文章的内容。",
+  //     url: "/article/2",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "文章标题 3",
+  //     date: "2025-10-07",
+  //     content: "这是第三篇文章的内容,展示更多文章样式。",
+  //     url: "/article/3",
+  //   },
+  //   {
+  //     id: 1,
+  //     title: "文章标题 1",
+  //     date: "2025-10-05",
+  //     content: "这是第一篇文章的内容。",
+  //     url: "/article/1",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "文章标题 2",
+  //     date: "2025-10-06",
+  //     content: "这是第二篇文章的内容。",
+  //     url: "/article/2",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "文章标题 3",
+  //     date: "2025-10-07",
+  //     content: "这是第三篇文章的内容,展示更多文章样式。",
+  //     url: "/article/3",
+  //   },
+  //   {
+  //     id: 1,
+  //     title: "文章标题 1",
+  //     date: "2025-10-05",
+  //     content: "这是第一篇文章的内容。",
+  //     url: "/article/1",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "文章标题 2",
+  //     date: "2025-10-06",
+  //     content: "这是第二篇文章的内容。",
+  //     url: "/article/2",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "文章标题 3",
+  //     date: "2025-10-07",
+  //     content: "这是第三篇文章的内容,展示更多文章样式。",
+  //     url: "/article/3",
+  //   },
+  //   {
+  //     id: 1,
+  //     title: "文章标题 1",
+  //     date: "2025-10-05",
+  //     content: "这是第一篇文章的内容。",
+  //     url: "/article/1",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "文章标题 2",
+  //     date: "2025-10-06",
+  //     content: "这是第二篇文章的内容。",
+  //     url: "/article/2",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "文章标题 3",
+  //     date: "2025-10-07",
+  //     content: "这是第三篇文章的内容,展示更多文章样式。",
+  //     url: "/article/3",
+  //   },
+  // ];
 
   // 如果没有文章数据
   if (!posts || posts.length === 0) {
@@ -161,8 +169,8 @@ function addSlideUpAnimation(container) {
  * 初始化博客页（文章渲染 + slide-up 效果）
  * @param {HTMLElement} container - 包含导航栏的容器元素
  */
-const initBlog = function (container) {
-  renderBlogPosts(container);
+const initBlog = async function (container) {
+  await renderBlogPosts(container);
   addSlideUpAnimation(container);
 };
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="blog.tilex.backend.Tilex_blog_backend.dao.PostDao">
+
+    <!-- 结果映射（字段名和属性名对应） -->
+    <resultMap id="BaseResultMap" type="Post">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="status" property="status"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <!-- 查询所有文章 -->
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT id, title, content, status, created_at, updated_at
+        FROM posts
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT id, title, content, status, created_at, updated_at
+        FROM posts
+        WHERE id = #{id}
+    </select>
+
+    <!-- 根据状态查询 -->
+    <select id="selectByStatus" resultMap="BaseResultMap">
+        SELECT id, title, content, status, created_at, updated_at
+        FROM posts
+        WHERE status = #{status}
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 插入文章 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO posts (title, content, status)
+        VALUES (#{title}, #{content}, #{status})
+    </insert>
+
+    <!-- 更新文章 -->
+    <update id="update">
+        UPDATE posts
+        SET title = #{title},
+            content = #{content},
+            status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除文章 -->
+    <delete id="deleteById">
+        DELETE FROM posts WHERE id = #{id}
+    </delete>
+
+    <!-- 统计总数 -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM posts
+    </select>
+
+    <!-- 条件分页查询 -->
+    <select id="selectArticlesByCondition" resultType="blog.tilex.backend.Tilex_blog_backend.entity.Post">
+        SELECT * FROM posts
+        <where>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+        <choose>
+            <when test="sortField != null and sortField != ''">
+                ORDER BY
+                <choose>
+                    <when test="sortField == 'createdAt'">created_at</when>
+                    <when test="sortField == 'updatedAt'">updated_at</when>
+                    <otherwise>created_at</otherwise>
+                </choose>
+                <choose>
+                    <when test="sortOrder == 'asc'">ASC</when>
+                    <otherwise>DESC</otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                ORDER BY created_at DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 查询总记录数 -->
+    <select id="countArticlesByCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM posts
+        WHERE 1=1
+        <if test="title != null and title != ''">
+            AND title LIKE CONCAT('%', #{title}, '%')
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+</mapper>

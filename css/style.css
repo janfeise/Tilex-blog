@@ -87,6 +87,34 @@ p {
   letter-spacing: 1.5px;
 }
 
+.btn {
+  font-weight: 400;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  transition: all 0.3s;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.btn__read-more {
+  letter-spacing: 2rem;
+  border-radius: 0;
+  color: #444;
+  background-color: #f1f1f1;
+  background-image: linear-gradient(120deg, transparent 50%, white 50%);
+  background-size: 230%;
+  transition: 0.5s;
+}
+.btn__read-more:hover {
+  color: skyblue;
+  background-color: skyblue;
+  background-position: 100% center;
+}
+
 .nav {
   position: absolute;
   top: 0;
@@ -178,6 +206,7 @@ p {
 }
 .seasons__content {
   height: 100%;
+  opacity: 0;
 }
 .seasons__content:hover {
   cursor: default;
@@ -264,7 +293,7 @@ p {
 }
 
 body.article .header {
-  height: max-content;
+  height: 9rem;
 }
 
 body.article {
@@ -276,31 +305,28 @@ body.article .nav {
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
 }
 
-.article__container {
-  padding: 10rem 0rem;
-  width: 100%;
-  height: auto;
-  display: flex;
-}
-.article__left {
-  flex: 1; /* 占据剩余空间 */
-}
-.article__right {
-  flex: 0 0 20%; /* 不增长，不缩小，固定宽度30% */
-}
 .post {
-  margin: 5rem 0;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  width: 100%;
   line-height: 1.7;
   color: #333;
+  display: flex;
+  justify-content: center;
 }
 .post__content {
-  font-size: 1.6rem;
-  margin-left: 10rem;
-  padding: 2rem 5rem;
+  width: 60%;
+  margin: 5rem 0rem;
+  margin-right: 15rem;
+  padding: 3rem 5rem;
+  font-size: 2rem;
   border-radius: 1rem;
   background-color: white;
+}
+
+.article__right {
+  position: fixed;
+  top: 30%;
+  right: 10%;
+  font-size: 2rem;
 }
 
 .post__content table {
@@ -366,22 +392,28 @@ body.blog .nav {
 }
 .blog__wrap {
   background-color: #f7f7f7;
-  padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 .blog__wrap:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 .blog__header {
   text-align: center;
+  padding: 2rem 2rem 0;
   margin-bottom: 1rem;
 }
 .blog__title {
+  width: 100%;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 1rem;
 }
 .blog__content {
   font-size: 1.6rem;
+  padding: 0 2rem 1rem;
 }
 .blog__content > p {
   height: 7rem;
@@ -395,6 +427,7 @@ body.blog .nav {
 .blog__goto {
   display: block;
   margin-left: auto;
+  border-top: 2px dashed #777;
 }
 
 /*# sourceMappingURL=style.css.map */

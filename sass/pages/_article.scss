@@ -1,7 +1,7 @@
 @use "../abstracts/" as a;
 
 body.article .header {
-  height: max-content;
+  height: 9rem;
 }
 
 body.article {
@@ -13,32 +13,13 @@ body.article .nav {
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
 }
 
-.article {
-  &__container {
-    padding: 10rem 0rem;
-    width: 100%;
-    height: auto;
-    display: flex;
-  }
-
-  &__left {
-    flex: 1; /* 占据剩余空间 */
-  }
-
-  &__right {
-    flex: 0 0 20%; /* 不增长，不缩小，固定宽度30% */
-  }
-
-  &__wrap {
-  }
-}
-
 .post {
-  margin: 5rem 0;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  width: 100%;
   line-height: 1.7;
   color: a.$color-grey-dark-1;
+
+  display: flex;
+  justify-content: center;
 
   &__title {
   }
@@ -47,12 +28,22 @@ body.article .nav {
   }
 
   &__content {
-    font-size: a.$font-size-body;
-    margin-left: 10rem;
-    padding: 2rem 5rem;
+    width: 60%;
+    margin: 5rem 0rem;
+    margin-right: 15rem;
+    padding: 3rem 5rem;
+    font-size: a.$font-size-heading;
     border-radius: 1rem;
     background-color: white;
   }
+}
+
+.article__right {
+  position: fixed;
+  top: 30%;
+  right: 10%;
+
+  font-size: a.$font-size-heading;
 }
 
 // 为markdown渲染的表格添加样式

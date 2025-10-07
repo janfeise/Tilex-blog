@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog.tilex.backend.Tilex_blog_backend.dao.TestDao">
+
+    <!-- 定义结果映射 -->
+    <resultMap id="TestResultMap" type="blog.tilex.backend.Tilex_blog_backend.entity.Test">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="createAt" column="create_at"/>
+    </resultMap>
+
+    <!-- 使用 resultMap 代替 resultType -->
+    <select id="getDocById" resultMap="TestResultMap" parameterType="long">
+        select * from test_user where id = #{docId}
+    </select>
+</mapper>

@@ -8,7 +8,7 @@
  * 4. 所有 API 请求均通过该模块发起，保证请求逻辑可维护、可扩展
  */
 
-const BASE_URL = "https://api.example.com"; // 后端接口基础地址
+const BASE_URL = "http://localhost:8080"; // 后端接口基础地址
 
 /**
  * 封装 fetch 请求

@@ -10,6 +10,16 @@
 
 ---
 
+启动项目：
+
+```cmd
+npx vite
+```
+
+> 由于 `import hljs from "highlight.js"` 使用了 ESModule 语法和现代依赖解析，必须通过 `npx vite` 等构建工具启动项目来正确处理模块打包和依赖加载（node_modules），浏览器才能正常识别和运行。
+
+---
+
 ## 功能概述
 
 | 功能名称 | 功能描述                                             | 实现时间   |

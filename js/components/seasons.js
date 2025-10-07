@@ -44,8 +44,8 @@ function getCurrentSeason() {
  */
 const updateSeasonClassName = function (container) {
   // 0. 获取当前所在的季节和对应的映射表数据
-  const currentSeason = getCurrentSeason();
-  // const currentSeason = "春";
+  // const currentSeason = getCurrentSeason();
+  const currentSeason = "春";
   const config = SEASON_CONFIG[currentSeason];
 
   if (!config) {
@@ -71,7 +71,7 @@ const updateSeasonClassName = function (container) {
 
   // 5. 添加淡入动画
   safeUpdate(container, ".seasons__content", (contentEl) => {
-    contentEl.style.animation = "fade-in 1.5s ease-in-out";
+    contentEl.style.animation = "fade-in 1.5s ease-in-out .5s forwards";
   });
 };
 
