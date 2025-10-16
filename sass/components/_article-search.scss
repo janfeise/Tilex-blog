@@ -1,0 +1,75 @@
+/**
+* 博客页面的搜索组件样式设置
+*/
+@use "../abstracts/" as a;
+
+.article-search {
+  margin: 0 8rem 0 5rem;
+
+  &__container {
+    width: 100%;
+  }
+
+  &__results {
+    width: 100%;
+
+    &--container {
+      width: 100%;
+      background-color: a.$color-white;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      //   z-index: 10;
+    }
+
+    &--content {
+      max-width: 23rem;
+      list-style: none;
+      overflow: hidden;
+      padding-top: 1rem;
+
+      & li {
+        padding: 1rem 0;
+        border-top: dashed 1px gray;
+      }
+
+      //   & li:not(:last-child) {
+      //     margin-bottom: 1rem;
+      //   }
+    }
+
+    &--title {
+      width: 100%;
+      font-size: a.$font-size-body;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &--snippets {
+      width: 100%;
+      font-size: a.$font-size-small;
+      margin: 0;
+      padding: 0;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+// 搜索框
+#article-search {
+  &__input {
+    width: 25rem;
+    padding: 0.7rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: a.$font-size-body;
+
+    &::placeholder {
+      color: a.$color-grey-dark;
+    }
+  }
+}

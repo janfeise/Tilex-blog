@@ -69,7 +69,7 @@ h2 {
   padding: 5px 0;
   margin: 1.5rem 0;
   line-height: 1.4;
-  font-size: a.$font-size-xl;
+  font-size: a.$font-size-large;
 }
 
 p {
@@ -80,4 +80,9 @@ p {
   line-height: 1.4;
   font-size: a.$font-size-body;
   letter-spacing: 1.5px;
+}
+
+.highlight {
+  background-color: #ffff00;
+  color: #333;
 }

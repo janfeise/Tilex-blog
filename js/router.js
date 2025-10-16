@@ -7,11 +7,11 @@
  * 3. 自动识别当前页面路径并加载对应组件
  */
 import { articleContainer } from "./dom/articlDom.js";
-import { blogWrapper } from "./dom/blogDom.js";
+import { articleSearchContainer, blogWrapper } from "./dom/blogDom.js";
 import { headerSeasonsContainer, headerNavContainer } from "./dom/headerDom.js";
 import { initSeasons } from "./components/seasons.js";
 import { initNav } from "./components/nav.js";
-import { initBlog } from "./pages/blog.js";
+import { articleSearch, initBlog } from "./pages/blog.js";
 import { loadComponents } from "./utils/loadComponent.js";
 import { initArticle } from "./pages/article.js";
 
@@ -45,6 +45,11 @@ const pageSpecificComponents = {
       container: blogWrapper,
       name: "blog-article",
       initFuc: initBlog,
+    },
+    {
+      container: articleSearchContainer,
+      name: "article-search",
+      initFuc: articleSearch,
     },
   ],
 

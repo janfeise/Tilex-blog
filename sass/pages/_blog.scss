@@ -17,7 +17,7 @@ body.blog .nav {
   padding-bottom: 20rem;
 
   &__container {
-    padding: 15rem;
+    padding: 15rem 0 15rem 10rem;
     width: 100%;
     height: auto;
     display: flex;
@@ -30,9 +30,11 @@ body.blog .nav {
   }
 
   &__right {
-    flex: 0 0 15%; /* 不增长，不缩小，固定宽度30% */
+    flex: 0 0 20%; /* 不增长，不缩小，固定宽度30% */
+    // max-width: 28rem;
+    padding: 5rem 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 
     height: 40rem;
@@ -63,6 +65,7 @@ body.blog .nav {
 
   &__title {
     width: 100%;
+    font-size: a.$font-size-xl;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

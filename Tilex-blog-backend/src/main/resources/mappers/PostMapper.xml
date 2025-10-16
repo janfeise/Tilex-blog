@@ -14,10 +14,11 @@
         <result column="updated_at" property="updatedAt"/>
     </resultMap>
 
-    <!-- 查询所有文章 -->
+    <!-- 查询所有状态为1的文章 -->
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT id, title, content, status, created_at, updated_at
         FROM posts
+        where status = 1
         ORDER BY created_at DESC
     </select>
 
@@ -25,7 +26,8 @@
     <select id="selectById" resultMap="BaseResultMap">
         SELECT id, title, content, status, created_at, updated_at
         FROM posts
-        WHERE id = #{id}
+        WHERE status = 1
+          AND id = #{id}
     </select>
 
     <!-- 根据状态查询 -->
@@ -41,6 +43,23 @@
         INSERT INTO posts (title, content, status)
         VALUES (#{title}, #{content}, #{status})
     </insert>
+
+    <!--
+        根据关键词搜索文章
+        重点: 返回完整的 content 字段,在 Service 层进行片段提取和高亮处理
+    -->
+    <select id="searchArticlesByKeyword" resultMap="BaseResultMap">
+        SELECT
+            id, title, content, status, created_at, updated_at
+        FROM posts
+        WHERE status = 1                    -- 只查询已发布的文章
+          AND (
+            LOWER(title) LIKE CONCAT('%', #{keyword}, '%')
+                OR LOWER(content) LIKE CONCAT('%', #{keyword}, '%')
+            )
+        ORDER BY created_at DESC
+            LIMIT 50                          -- 限制返回数量,避免过多数据
+    </select>
 
     <!-- 更新文章 -->
     <update id="update">

@@ -6,7 +6,7 @@ import lombok.Data;
 
 
 /**
- * 文章查询请求参数
+ * 文章 查询 请求参数
  */
 @Data
 public class ArticleQueryDTO {

@@ -12,11 +12,18 @@
 
 启动项目：
 
+前端：
+
 ```cmd
 npx vite
 ```
 
 > 由于 `import hljs from "highlight.js"` 使用了 ESModule 语法和现代依赖解析，必须通过 `npx vite` 等构建工具启动项目来正确处理模块打包和依赖加载（node_modules），浏览器才能正常识别和运行。
+
+后端：
+
+- 数据库打开
+- springboot启动
 
 ---
 
@@ -516,9 +523,27 @@ A: 可以，使用 `addRoute()` 函数动态添加新路由
 
 ## 动态加载组件
 
+### 流程
+
+从 `components/` 文件夹中加载目标组件，挂载到指定位置后，执行 `initFunc` 函数进行初始化
+
+在 `router.js` 文件夹统一管理组件加载：
+
+```js
+"/": [
+    {
+        container: headerSeasonsContainer,
+        name: "seasons",
+        initFuc: initSeasons,
+    },
+]
+```
+
+在 `/` 主页将组件：`seasons.html` 加载到指定位置：`headerSeasonsContainer`，然后执行初始化函数：`initSeasons`
+
 ### 核心原则
 
-> ⚠️ **关键点**：组件的 DOM 元素只有在加载完成后才能被获取和操作
+> ⚠️ **关键点**：组件的 DOM 元素只有在加载完成后才能被获取和操作——异步
 
 ### DOM 元素获取策略
 

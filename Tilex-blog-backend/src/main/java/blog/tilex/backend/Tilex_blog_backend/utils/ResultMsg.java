@@ -21,12 +21,12 @@ public class ResultMsg<T> implements Serializable {
 		this.data = data;
 	}
 
-	public static ResultMsg<Void> error(String msg) {
+	public static <T> ResultMsg<T> error(String msg) {
 		return error(500, msg);
 	}
 
-	public static ResultMsg error(int status, String message) {
-		return new ResultMsg(status,message,null);
+	public static <T> ResultMsg<T> error(int status, String message) {
+		return new ResultMsg<>(status, message, null);
 	}
 
 	// 新增带数据的success方法

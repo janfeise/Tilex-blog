@@ -38,6 +38,9 @@ public interface PostDao {
     // 根据ID查询文章
     Post selectById(@Param("id") Integer id);
 
+    // 根据关键词搜索文章
+    List<Post> searchArticlesByKeyword(@Param("keyword") String keyword);
+
     // 根据状态查询文章
     List<Post> selectByStatus(@Param("status") Integer status);
 

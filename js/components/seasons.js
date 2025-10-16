@@ -44,8 +44,8 @@ function getCurrentSeason() {
  */
 const updateSeasonClassName = function (container) {
   // 0. 获取当前所在的季节和对应的映射表数据
-  // const currentSeason = getCurrentSeason();
-  const currentSeason = "春";
+  const currentSeason = getCurrentSeason();
+  // const currentSeason = "冬";
   const config = SEASON_CONFIG[currentSeason];
 
   if (!config) {

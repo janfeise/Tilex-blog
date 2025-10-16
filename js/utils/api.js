@@ -23,3 +23,7 @@ export function getArticles(params) {
 export function getArticleById(id) {
   return request(`/articles/${id}`, "GET");
 }
+
+export function searchArticles(params) {
+  return request("/articles/search", "POST", params);
+}

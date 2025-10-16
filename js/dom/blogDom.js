@@ -1,3 +1,7 @@
 const blogWrapper = document.querySelector(".blog__grid"); /* 存放文章的容器 */
 
-export { blogWrapper };
+const articleSearchContainer = document.querySelector(
+  ".article-search__container"
+);
+
+export { blogWrapper, articleSearchContainer };

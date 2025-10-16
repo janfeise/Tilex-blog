@@ -74,7 +74,7 @@ h2 {
   padding: 5px 0;
   margin: 1.5rem 0;
   line-height: 1.4;
-  font-size: 3rem;
+  font-size: 2.4rem;
 }
 
 p {
@@ -85,6 +85,69 @@ p {
   line-height: 1.4;
   font-size: 1.6rem;
   letter-spacing: 1.5px;
+}
+
+.highlight {
+  background-color: #ffff00;
+  color: #333;
+}
+
+/**
+* 博客页面的搜索组件样式设置
+*/
+.article-search {
+  margin: 0 8rem 0 5rem;
+}
+.article-search__container {
+  width: 100%;
+}
+.article-search__results {
+  width: 100%;
+}
+.article-search__results--container {
+  width: 100%;
+  background-color: white;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.article-search__results--content {
+  max-width: 23rem;
+  list-style: none;
+  overflow: hidden;
+  padding-top: 1rem;
+}
+.article-search__results--content li {
+  padding: 1rem 0;
+  border-top: dashed 1px gray;
+}
+.article-search__results--title {
+  width: 100%;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.article-search__results--snippets {
+  width: 100%;
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+}
+
+#article-search__input {
+  width: 25rem;
+  padding: 0.7rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 1.6rem;
+}
+#article-search__input::placeholder {
+  color: #777;
 }
 
 .btn {
@@ -104,7 +167,7 @@ p {
   letter-spacing: 2rem;
   border-radius: 0;
   color: #444;
-  background-color: #f1f1f1;
+  background-color: #f7f7f7;
   background-image: linear-gradient(120deg, transparent 50%, white 50%);
   background-size: 230%;
   transition: 0.5s;
@@ -283,7 +346,7 @@ p {
   filter: blur(1px);
 }
 .seasons__winter {
-  background-image: linear-gradient(to bottom right, rgba(255, 253, 255, 0.2), rgba(255, 191, 255, 0.2)), url("../../assets/pic/seasons-冬.png");
+  background-image: linear-gradient(to bottom right, rgba(255, 253, 255, 0.1), rgba(255, 191, 255, 0.1)), url("../../assets/pic/seasons-冬.png");
 }
 
 .header {
@@ -368,7 +431,7 @@ body.blog .nav {
   padding-bottom: 20rem;
 }
 .blog__container {
-  padding: 15rem;
+  padding: 15rem 0 15rem 10rem;
   width: 100%;
   height: auto;
   display: flex;
@@ -379,9 +442,10 @@ body.blog .nav {
   padding-right: 5rem;
 }
 .blog__right {
-  flex: 0 0 15%; /* 不增长，不缩小，固定宽度30% */
+  flex: 0 0 20%; /* 不增长，不缩小，固定宽度30% */
+  padding: 5rem 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 40rem;
 }
@@ -406,6 +470,7 @@ body.blog .nav {
 }
 .blog__title {
   width: 100%;
+  font-size: 3rem;
   text-wrap: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

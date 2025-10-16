@@ -1,5 +1,6 @@
-import { getArticles } from "../utils/api.js";
-import { findAllElements } from "./../utils/findDom.js";
+import { getArticles, searchArticles } from "../utils/api.js";
+import { findAllElements, safeUpdate } from "./../utils/findDom.js";
+import { debounce } from "./../utils/debounce.js";
 
 const BASE_URL = "/pages/article.html";
 
@@ -166,6 +167,57 @@ function addSlideUpAnimation(container) {
 }
 
 /**
+ * 显示搜索结果
+ */
+const displySearchResults = function (displayDom, searchResults) {
+  console.log("测试");
+  console.log(displayDom, searchResults);
+  safeUpdate(displayDom, ".article-search__results--content", (el) => {
+    el.innerHTML = "";
+    searchResults.forEach((item) => {
+      // 创建 li
+      const li = document.createElement("li");
+
+      // 创建标题 h3
+      const h3 = document.createElement("h3");
+      h3.className = "article-search__results--title";
+      h3.innerHTML = item.title; // innerHTML 可包含 HTML 标签
+      li.appendChild(h3);
+
+      // 创建多个 snippets p
+      item.snippets.forEach((snippet) => {
+        const p = document.createElement("p");
+        p.className = "article-search__results--snippets";
+        p.innerHTML = snippet; // 可以保留 HTML 标签
+        li.appendChild(p);
+      });
+
+      // 添加 li 到容器
+      el.appendChild(li);
+    });
+  });
+};
+
+/**
+ * 文章搜索
+ */
+const articleSearch = async function (container) {
+  safeUpdate(container, "#article-search__input", (el) => {
+    el.addEventListener(
+      "input",
+      debounce(async (e) => {
+        console.log("当前输入内容：", e.target.value);
+        const params = { keyword: e.target.value };
+        const res = await searchArticles(params);
+        console.log(res.data);
+
+        displySearchResults(container, res.data);
+      }, 300)
+    );
+  });
+};
+
+/**
  * 初始化博客页（文章渲染 + slide-up 效果）
  * @param {HTMLElement} container - 包含导航栏的容器元素
  */
@@ -174,4 +226,4 @@ const initBlog = async function (container) {
   addSlideUpAnimation(container);
 };
 
-export { initBlog };
+export { initBlog, articleSearch };
