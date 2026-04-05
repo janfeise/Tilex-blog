@@ -1,5 +1,5 @@
 # =====================
-# 环境文件 - 最高优先级
+# 环境文件 - 最高优先级（包含隐私密钥和 API 密钥）
 # =====================
 .env
 .env.local
@@ -9,19 +9,29 @@
 .env.development.local
 
 # =====================
-# 私密配置
+# 私密配置文件
 # =====================
 *.key
 *.pem
+*.pfx
+*.p12
+*.jks
+*.keystore
+.ssh/
+config/private/
+secrets/
 credentials.json
 api-keys.json
+private/
 
 # =====================
 # 项目依赖和构建
 # =====================
 node_modules
+.DS_Store
 dist
 dist-ssr
+coverage
 *.local
 .turbo/
 
@@ -35,25 +45,48 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+tmp/*.log
 
 # =====================
-# IDE 和编辑器
+# IDE 和编辑器配置
 # =====================
 .vscode/*
 !.vscode/extensions.json
 .vscode/settings.json
 .vscode/launch.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/keybindings.json
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
 
 # =====================
-# Vite
+# 操作系统文件
 # =====================
-.vite/
-*.timestamp-*-*.mjs
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# =====================
+# 本地缓存
+# =====================
+.eslintcache
+.stylelintcache
+
+# =====================
+# Cypress 和 E2E 测试
+# =====================
+/cypress/videos/
+/cypress/screenshots/
+
+# =====================
+# Vitest 和 Vite
+# =====================
 __screenshots__/
+*.timestamp-*-*.mjs
+.vite/

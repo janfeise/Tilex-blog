@@ -1,3 +1,141 @@
-node_modules/
-
+# =====================
+# 环境文件 - 最高优先级（包含隐私密钥和 API 密钥）
+# =====================
 .env
+.env.local
+.env.*.local
+.env.production.local
+.env.test.local
+.env.development.local
+
+# =====================
+# 后端配置 - 包含数据库密码等敏感信息
+# =====================
+**/src/main/resources/application*.properties
+**/src/main/resources/application*.yml
+**/src/main/resources/application*.yaml
+!**/src/main/resources/application.properties.example
+!**/src/main/resources/application.example.properties
+config/
+*.conf.properties
+
+# =====================
+# 私密配置文件
+# =====================
+*.key
+*.pem
+*.pfx
+*.p12
+*.jks
+*.keystore
+.ssh/
+config/private/
+secrets/
+credentials.json
+api-keys.json
+private/
+
+# =====================
+# 项目依赖和构建
+# =====================
+node_modules/
+dist/
+build/
+out/
+target/
+.next/
+*.tsbuildinfo
+coverage/
+*.bundle.js
+
+# =====================
+# 日志文件
+# =====================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+tmp/*.log
+hs_err_pid*.log
+
+# =====================
+# IDE 和编辑器配置
+# =====================
+.vscode/*
+!.vscode/extensions.json
+.vscode/settings.json
+.vscode/launch.json
+.vscode/keybindings.json
+.idea/
+*.iml
+*.iws
+*.ipr
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =====================
+# 操作系统文件
+# =====================
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# =====================
+# Maven 和 Gradle
+# =====================
+target/
+.gradle/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# =====================
+# Java
+# =====================
+*.class
+.classpath
+.project
+
+# =====================
+# 数据库文件
+# =====================
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.bin
+
+# =====================
+# 本地缓存
+# =====================
+.eslintcache
+.stylelintcache
+.cache/
+.turbo/
+
+# =====================
+# 测试文件夹
+# =====================
+/cypress/videos/
+/cypress/screenshots/
+__screenshots__/
+
+# =====================
+# Vite 和 Vitest
+# =====================
+*.timestamp-*-*.mjs
+.vite/
