@@ -1,24 +1,22 @@
 {
-  "name": "tilex-blog-admin",
-  "version": "0.0.0",
+  "name": "vite-project",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "element-plus": "^2.11.4",
+    "axios": "^1.13.2",
+    "element-plus": "^2.11.7",
+    "md-editor-v3": "^6.1.1",
     "vue": "^3.5.22",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.1.7",
-    "vite-plugin-vue-devtools": "^8.0.2"
+    "vite": "^7.1.7"
   }
 }

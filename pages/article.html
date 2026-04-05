@@ -12,13 +12,20 @@
     <title>文章</title>
   </head>
   <body class="article">
+    <div id="top-anchor"></div>
+
     <header class="header">
+      <div class="header__sentinel"></div>
+      <!-- 哨兵：观察目标 -->
+
       <div class="header__nav-container"></div>
     </header>
 
     <main>
-      <div class="article__wrap"></div>
-      <div class="article__right">右侧：搜索 | 目录</div>
+      <div class="article__wrap">
+        <div class="article__post--container hidden">文章</div>
+        <div class="article__toc--container hidden">目录</div>
+      </div>
 
       <!-- 文章不存在时的提示 -->
       <!-- <div id="not-found" style="display: none">
@@ -26,5 +33,8 @@
         <p><a href="index.html">返回首页</a></p>
       </div> -->
     </main>
+
+    <!-- 回到页面顶部组件的挂载点 -->
+    <div class="backToTop__container"></div>
   </body>
 </html>

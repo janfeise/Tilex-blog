@@ -1,9 +1,6 @@
 package blog.tilex.backend.Tilex_blog_backend.service;
 
-import blog.tilex.backend.Tilex_blog_backend.dto.ArticleQueryDTO;
-import blog.tilex.backend.Tilex_blog_backend.dto.ArticleSearchVO;
-import blog.tilex.backend.Tilex_blog_backend.dto.ArticleVO;
-import blog.tilex.backend.Tilex_blog_backend.dto.UploadArticleDTO;
+import blog.tilex.backend.Tilex_blog_backend.dto.*;
 import blog.tilex.backend.Tilex_blog_backend.utils.PageResult;
 
 import java.util.List;
@@ -34,6 +31,11 @@ public interface ArticleService {
     ArticleVO createArticle(UploadArticleDTO uploadArticleDTO);
 
     /**
+     * 批量上传文章
+     */
+    List<ArticleVO> createArticles(List<UploadArticleDTO> uploadArticleDTOList);
+
+    /**
      * 搜索文章
      * 核心流程:
      * 1. 从数据库查询包含关键词的文章(完整content)
@@ -45,4 +47,9 @@ public interface ArticleService {
      * @return 搜索结果列表(包含snippets数组和完整content)
      */
     List<ArticleSearchVO> searchArticles(String keyword);
+
+    /**
+     * 更新文章
+     */
+    boolean updateArticle(Long articleId, UpdateArticleDTO dto);
 }

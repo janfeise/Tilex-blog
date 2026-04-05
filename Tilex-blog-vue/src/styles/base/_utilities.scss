@@ -1,0 +1,164 @@
+// ========================================
+// 基础工具类 - 通用样式辅助
+// ========================================
+@use "../abstracts" as a;
+
+// 隐藏元素（不占用空间）
+.hidden {
+  opacity: 0;
+  display: none;
+  pointer-events: none;
+}
+
+// 隐藏但保留空间
+.invisible {
+  visibility: hidden;
+}
+
+// 固定在顶部
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+// 固定在底部
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+// 相对定位
+.relative {
+  position: relative;
+}
+
+// 绝对定位
+.absolute {
+  position: absolute;
+}
+
+// Flex 容器
+.flex {
+  display: flex;
+}
+
+// Flex + 居中
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Flex + 两端对齐
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Flex + 环绕分布
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+// Flex + 列方向
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Grid 容器
+.grid {
+  display: grid;
+}
+
+// 清除浮动
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+// 文本对齐
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-justify {
+  text-align: justify;
+}
+
+// 字体粗细
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-bold {
+  font-weight: 600;
+}
+.font-bolder {
+  font-weight: 700;
+}
+
+// 文本溢出处理
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本溢出（3 行）
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 禁止选择文本
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+// 光标样式
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+// 浮动
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.float-none {
+  float: none;
+}

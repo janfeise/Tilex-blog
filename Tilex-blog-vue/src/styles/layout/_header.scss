@@ -1,0 +1,117 @@
+// ========================================
+// 页头布局容器
+// ========================================
+@use "../abstracts" as a;
+
+.header {
+  width: 100%;
+  position: relative;
+  background-color: a.$color-white;
+  box-shadow: a.$shadow-sm;
+  z-index: 50;
+
+  // 响应式处理
+  @media (max-width: a.$breakpoint-tablet) {
+    // 平板设备优化
+  }
+
+  @media (max-width: a.$breakpoint-mobile) {
+    // 手机设备优化
+  }
+}
+
+// 主容器
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 a.$spacing-lg;
+
+  &--fluid {
+    max-width: 100%;
+  }
+
+  &--narrow {
+    max-width: 900px;
+  }
+
+  &--wide {
+    max-width: 1400px;
+  }
+
+  @media (max-width: a.$breakpoint-tablet) {
+    padding: 0 a.$spacing-md;
+  }
+
+  @media (max-width: a.$breakpoint-mobile) {
+    padding: 0 a.$spacing-sm;
+  }
+}
+
+// 两栏布局（内容 + 侧边栏）
+.layout-2col {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: a.$spacing-xl;
+
+  @media (max-width: a.$breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// 主内容区域
+.main-content {
+  width: 100%;
+  flex: 1;
+}
+
+// 侧边栏
+.sidebar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: a.$spacing-lg;
+
+  .sidebar-item {
+    background-color: a.$color-white;
+    border: 1px solid a.$color-grey;
+    border-radius: a.$border-radius-md;
+    padding: a.$spacing-lg;
+
+    &__title {
+      font-size: a.$font-size-heading;
+      font-weight: 600;
+      margin-bottom: a.$spacing-md;
+      color: a.$color-grey-dark-1;
+    }
+
+    &__content {
+      color: a.$color-grey-dark;
+      line-height: 1.8;
+    }
+  }
+}
+
+// 页脚
+.footer {
+  width: 100%;
+  background-color: a.$color-grey-light;
+  color: a.$color-grey-dark;
+  padding: a.$spacing-xl a.$spacing-lg;
+  margin-top: a.$spacing-xxl;
+  text-align: center;
+  border-top: 1px solid a.$color-grey;
+
+  p {
+    margin: 0.5rem 0;
+    font-size: a.$font-size-small;
+  }
+
+  a {
+    color: a.$color-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

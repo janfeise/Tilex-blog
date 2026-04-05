@@ -10,6 +10,7 @@ body.blog {
 
 body.blog .nav {
   color: a.$color-grey-dark-2;
+  background-color: a.$color-grey-light;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
 }
 
@@ -91,6 +92,7 @@ body.blog .nav {
   }
 
   &__goto {
+    width: 100%;
     display: block;
     margin-left: auto;
     border-top: 2px dashed a.$color-grey-dark;

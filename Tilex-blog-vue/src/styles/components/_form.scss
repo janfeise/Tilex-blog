@@ -1,0 +1,98 @@
+// ========================================
+// 表单组件
+// ========================================
+@use "../abstracts" as a;
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: a.$spacing-lg;
+
+  // 标签
+  .label {
+    font-size: a.$font-size-body;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: a.$color-grey-dark-1;
+  }
+
+  // 输入框基础样式
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: a.$spacing-md;
+    font-size: a.$font-size-body;
+    border: 1px solid a.$color-grey;
+    border-radius: a.$border-radius-sm;
+    background-color: a.$color-white;
+    color: a.$color-grey-dark-1;
+    transition: all a.$transition-normal;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: a.$color-primary;
+      box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.1);
+      background-color: a.$color-white;
+    }
+
+    &:disabled {
+      background-color: a.$color-grey-light;
+      color: a.$color-grey-dark;
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: a.$color-grey-dark;
+      opacity: 0.7;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+// 复选框和单选框
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: a.$spacing-md;
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    margin-right: a.$spacing-md;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+  }
+
+  label {
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+}
+
+// 错误消息
+.form-error {
+  color: #e74c3c;
+  font-size: a.$font-size-small;
+  margin-top: 0.3rem;
+}
+
+// 成功消息
+.form-success {
+  color: #27ae60;
+  font-size: a.$font-size-small;
+  margin-top: 0.3rem;
+}
+
+// 表单组
+.form-group {
+  margin-bottom: a.$spacing-lg;
+}

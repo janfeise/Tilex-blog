@@ -33,6 +33,15 @@
       & li {
         padding: 1rem 0;
         border-top: dashed 1px gray;
+
+        &:hover {
+          cursor: pointer;
+          background-color: a.$color-grey;
+        }
+      }
+
+      & li:last-child {
+        border-bottom: dashed 1px gray;
       }
 
       //   & li:not(:last-child) {

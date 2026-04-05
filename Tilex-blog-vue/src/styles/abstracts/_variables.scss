@@ -1,0 +1,60 @@
+// ========================================
+// 变量定义 - SASS 项目的基础资源库
+// ========================================
+
+// 🎨 主色调系统
+$color-primary: #87ceeb; // 主蓝色
+$color-primary-light: #b9e6fa; // 浅蓝
+$color-primary-dark: #4aa3c2; // 深蓝
+$color-primary-gradient-start: #a3dbf3; // 渐变起点
+$color-primary-gradient-end: #a3dbf3; // 渐变终点
+$color-primary-disabled: #c3e8ef; // 禁用状态
+
+// 🔘 灰色系统
+$color-white: white; // 纯白
+$color-bg: #f1f1f1; // 页面背景
+$color-grey-light: #f7f7f7; // 浅灰（背景）
+$color-grey: #eee; // 中灰（分隔线）
+$color-grey-dark: #777; // 深灰（文字）
+$color-grey-dark-1: #333; // 更深灰
+$color-grey-dark-2: #444; // 最深灰
+$color-black: black; // 纯黑
+
+// ✍️ 字体大小系统（基数：1rem = 10px）
+$font-size-small-ssm: 1rem; // 10px - 超超小号文字
+$font-size-small-sm: 1.2rem; // 12px - 超小号文字
+$font-size-small: 1.4rem; // 14px - 小号文字
+$font-size-body: 1.6rem; // 16px - 正文默认
+$font-size-heading: 2rem; // 20px - 副标题
+$font-size-large: 2.4rem; // 24px - 大字体
+$font-size-xl: 3rem; // 30px - 特大字体
+$font-size-xxl: 4rem; // 40px - 特特大字体
+
+// 📏 间距系统
+$spacing-xs: 0.5rem; // 5px
+$spacing-sm: 1rem; // 10px
+$spacing-md: 1.5rem; // 15px
+$spacing-lg: 2rem; // 20px
+$spacing-xl: 3rem; // 30px
+$spacing-xxl: 5rem; // 50px
+
+// 🔲 圆角
+$border-radius-sm: 0.4rem; // 4px
+$border-radius-md: 1rem; // 10px
+$border-radius-lg: 2rem; // 20px
+
+// ⏱️ 动画时间
+$transition-fast: 0.2s; // 快速动画
+$transition-normal: 0.3s; // 常速动画
+$transition-slow: 0.5s; // 缓速动画
+
+// 💧 阴影
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+// 📱 响应式断点
+$breakpoint-mobile: 480px; // 手机
+$breakpoint-tablet: 768px; // 平板
+$breakpoint-desktop: 1024px; // 桌面
+$breakpoint-wide: 1440px; // 超宽屏

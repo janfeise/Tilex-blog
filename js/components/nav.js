@@ -1,4 +1,5 @@
 import { findRequiredElement, safeUpdate } from "../utils/findDom.js";
+import { observeDom } from "../utils/observe.js";
 
 /**
  * 点击logo时跳转首页
@@ -70,6 +71,38 @@ function handleHover(e) {
 }
 
 /**
+ * 当导航栏移出视野时：使用fixed
+ */
+const fixedNav = function (container) {
+  const sentinel = container.previousElementSibling;
+  const navDom = findRequiredElement(container, ".nav");
+
+  // guard
+  if (!sentinel) return;
+
+  observeDom(
+    sentinel,
+    (el, isEnter) => {
+      console.log(isEnter);
+      // 当导航栏移出视野时：添加类名 fixedTop
+      if (!isEnter) {
+        // 先清除动画，确保重复调用时动画能重新触发
+        // navDom.classList.remove("fixedTop");
+        navDom.classList.add("fixedTop");
+      } else {
+        // navDom.classList.add("fixedTop");
+        navDom.classList.remove("fixedTop");
+      }
+    },
+    {
+      root: null,
+      threshold: 1,
+      rootMargin: "90px",
+    }
+  );
+};
+
+/**
  * 初始化导航栏（动画 + hover 效果）
  * @param {HTMLElement} container - 包含导航栏的容器元素
  */
@@ -77,6 +110,7 @@ function initNav(container) {
   initHoverEffect(container);
   addAnimation(container);
   clickLogo(container);
+  fixedNav(container);
 }
 
 export { initNav };

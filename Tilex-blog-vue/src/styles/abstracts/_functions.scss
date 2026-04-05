@@ -1,0 +1,13 @@
+// ========================================
+// SASS 函数定义 - 预留用于复杂计算
+// ========================================
+
+// 示例：将像素值转换为 rem 单位
+// @function rem($pixels) {
+//   @return $pixels / 16px * 1rem;
+// }
+
+// 示例：计算颜色亮度
+// @function brightness($color) {
+//   @return (red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114) / 255;
+// }

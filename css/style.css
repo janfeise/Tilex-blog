@@ -33,6 +33,31 @@
     opacity: 1;
   }
 }
+/**
+ * 从当前位置滑出
+*/
+@keyframes slide-down-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+}
+/* “slide-left”（向左滑入）动画：
+   元素从右方 5rem 位置逐渐移动到原始位置，同时从透明过渡到不透明 */
+@keyframes slide-left {
+  0% {
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 @font-face {
   font-family: "LongCang";
   src: url("../assets/fonts/LongCang-Regular.ttf") format("truetype");
@@ -87,7 +112,7 @@ p {
   letter-spacing: 1.5px;
 }
 
-.highlight {
+.markdown-highlight {
   background-color: #ffff00;
   color: #333;
 }
@@ -123,6 +148,13 @@ p {
   padding: 1rem 0;
   border-top: dashed 1px gray;
 }
+.article-search__results--content li:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+.article-search__results--content li:last-child {
+  border-bottom: dashed 1px gray;
+}
 .article-search__results--title {
   width: 100%;
   font-size: 1.6rem;
@@ -150,12 +182,43 @@ p {
   color: #777;
 }
 
+.back-to-top {
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  z-index: 1000;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.back-to-top__link {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  background-color: #a3dbf3;
+  color: white;
+  border-radius: 50%;
+  position: relative;
+}
+.back-to-top__icon {
+  font-size: 3rem;
+  transition: font-size 0.2s;
+  text-decoration: none;
+  color: currentColor;
+}
+.back-to-top__icon::before {
+  content: "↑";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.back-to-top__icon:hover {
+  font-size: 3.5rem;
+}
+
 .btn {
   font-weight: 400;
   font-size: 1.6rem;
-  width: 100%;
   padding: 1rem 0;
-  border-radius: 0.5rem;
   outline: none;
   border: none;
   transition: all 0.3s;
@@ -173,8 +236,8 @@ p {
   transition: 0.5s;
 }
 .btn__read-more:hover {
-  color: skyblue;
-  background-color: skyblue;
+  color: #87ceeb;
+  background-color: #87ceeb;
   background-position: 100% center;
 }
 
@@ -351,7 +414,6 @@ p {
 
 .header {
   width: 100%;
-  height: 100vh;
   position: relative;
 }
 
@@ -361,11 +423,51 @@ body.article .header {
 
 body.article {
   background-color: #f7f7f7;
+  padding-bottom: 10rem;
 }
 
 body.article .nav {
   color: #444;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
+  background-color: #f7f7f7;
+}
+
+.article__wrap {
+  display: flex;
+  margin: 5rem 0rem;
+}
+.article__post--container {
+  width: 100vw;
+  flex: 1;
+}
+.article__toc--container {
+  flex: 0 0 20%;
+  position: fixed;
+  max-width: 27rem;
+  min-width: 25rem;
+  top: 20%;
+  right: 4%;
+  padding: 2rem;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  background-color: white;
+  max-height: 65vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* 自定义滚动条样式 */
+}
+.article__toc--container li {
+  padding: 0.5rem 0;
+  list-style: none;
+  color: #444;
+  border-bottom: 1px solid #333;
+}
+.article__toc--container li a {
+  text-decoration: none; /* 去掉下划线 */
+  color: inherit; /* 避免默认蓝色 */
+}
+.article__toc--container li a:hover {
+  color: #87ceeb;
 }
 
 .post {
@@ -375,21 +477,16 @@ body.article .nav {
   display: flex;
   justify-content: center;
 }
+.post img {
+  width: 100%;
+}
 .post__content {
   width: 60%;
-  margin: 5rem 0rem;
-  margin-right: 15rem;
   padding: 3rem 5rem;
+  margin-right: 15rem;
   font-size: 2rem;
   border-radius: 1rem;
   background-color: white;
-}
-
-.article__right {
-  position: fixed;
-  top: 30%;
-  right: 10%;
-  font-size: 2rem;
 }
 
 .post__content table {
@@ -424,6 +521,7 @@ body.blog {
 
 body.blog .nav {
   color: #444;
+  background-color: #f7f7f7;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
 }
 
@@ -490,9 +588,34 @@ body.blog .nav {
   margin-bottom: 1rem;
 }
 .blog__goto {
+  width: 100%;
   display: block;
   margin-left: auto;
   border-top: 2px dashed #777;
+}
+
+body,
+html {
+  margin: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.gallery-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+}
+
+.fixedTop {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

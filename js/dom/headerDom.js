@@ -4,4 +4,6 @@ const headerSeasonsContainer = document.querySelector(
   ".header__seasons-container"
 );
 
-export { headerNavContainer, headerSeasonsContainer };
+const headerSentinelDiv = document.querySelector(".header__sentinel");
+
+export { headerNavContainer, headerSeasonsContainer, headerSentinelDiv };

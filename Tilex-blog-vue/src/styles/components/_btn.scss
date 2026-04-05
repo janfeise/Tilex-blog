@@ -1,0 +1,127 @@
+// ========================================
+// 按钮组件
+// ========================================
+@use "../abstracts" as a;
+
+.btn {
+  font-weight: 400;
+  font-size: a.$font-size-body;
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  border-radius: a.$border-radius-md;
+  background-color: a.$color-primary;
+  color: white;
+  transition: all a.$transition-normal;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background-color: a.$color-primary-dark;
+    box-shadow: a.$shadow-md;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: a.$shadow-sm;
+  }
+
+  &:disabled {
+    background-color: a.$color-primary-disabled;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  // 阅读更多按钮
+  &__read-more {
+    border-radius: 5px;
+    background-color: a.$color-primary;
+    color: a.$color-white;
+    background-image: linear-gradient(120deg, transparent 50%, white 50%);
+    background-size: 230%;
+    transition: all 0.5s;
+    height: 3rem;
+    margin-left: auto;
+
+    &:hover {
+      color: a.$color-primary;
+      background-color: a.$color-primary;
+      background-position: 100% center;
+    }
+  }
+
+  // 主按钮
+  &--primary {
+    background-color: a.$color-primary;
+    color: white;
+
+    &:hover {
+      background-color: a.$color-primary-dark;
+    }
+  }
+
+  // 次级按钮
+  &--secondary {
+    background-color: a.$color-grey-light;
+    color: a.$color-grey-dark;
+    border: 1px solid a.$color-grey;
+
+    &:hover {
+      background-color: a.$color-grey;
+      color: a.$color-grey-dark-1;
+    }
+  }
+
+  // 文本按钮
+  &--text {
+    background-color: transparent;
+    color: a.$color-primary;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: transparent;
+      color: a.$color-primary-dark;
+      text-decoration: underline;
+    }
+  }
+
+  // 大尺寸按钮
+  &--lg {
+    padding: 1.5rem 3rem;
+    font-size: a.$font-size-heading;
+  }
+
+  // 小尺寸按钮
+  &--sm {
+    padding: 0.5rem 1rem;
+    font-size: a.$font-size-small;
+  }
+
+  // 块级按钮（占满容器宽度）
+  &--block {
+    width: 100%;
+    display: flex;
+  }
+}
+
+// 按钮组
+.btn-group {
+  display: flex;
+  gap: 1rem;
+
+  .btn {
+    flex: 1;
+  }
+
+  &--vertical {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

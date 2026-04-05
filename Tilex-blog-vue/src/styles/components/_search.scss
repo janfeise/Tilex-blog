@@ -1,0 +1,44 @@
+// ========================================
+// 首页的搜索组件样式
+// ========================================
+@use "../abstracts" as a;
+
+// 高亮样式 - 用于搜索结果中的关键词突出显示
+.markdown-highlight {
+  background-color: #ffeb3b;
+  color: #000;
+  font-weight: 600;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  display: inline-block;
+}
+
+// 搜索对话框样式 - 仅在需要全局覆盖时定义
+// 组件内的样式由 SearchDialog.vue 的 scoped 样式管理
+.search-dialog {
+  // 对话框阴影效果
+  :deep(.el-dialog) {
+    border-radius: 1rem;
+    box-shadow: a.$shadow-lg;
+  }
+
+  // 对话框头部样式
+  :deep(.el-dialog__header) {
+    border-bottom: 2px solid a.$color-primary-light;
+    padding: 2rem;
+  }
+
+  // 对话框内容区域
+  :deep(.el-dialog__body) {
+    padding: 0;
+  }
+
+  // 关闭按钮样式
+  :deep(.el-dialog__close) {
+    color: a.$color-grey-dark;
+
+    &:hover {
+      color: a.$color-primary;
+    }
+  }
+}

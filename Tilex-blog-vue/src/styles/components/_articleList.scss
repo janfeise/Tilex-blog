@@ -1,0 +1,66 @@
+/**
+* 文章详情页侧边栏的文章列表组件样式
+*/
+@use "../abstracts" as a;
+
+.article-list {
+  position: sticky;
+  top: 2rem;
+  left: 0;
+
+  height: 95vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  // 美化滚动条 - webkit浏览器
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--el-border-color-lighter);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: var(--el-border-color);
+    }
+  }
+
+  // Firefox滚动条
+  scrollbar-width: thin;
+  scrollbar-color: var(--el-border-color-lighter) transparent;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    font-size: a.$font-size-small-sm;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--el-text-color-regular);
+    user-select: none;
+    border-left: 3px solid transparent;
+
+    &:hover {
+      background-color: var(--el-fill-color-light);
+      padding-left: 1.25rem;
+    }
+
+    &.active {
+      font-weight: bold;
+      color: var(--el-color-primary);
+      background-color: var(--el-fill-color);
+      border-left-color: var(--el-color-primary);
+      padding-left: 1.25rem;
+    }
+  }
+}

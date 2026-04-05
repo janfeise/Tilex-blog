@@ -84,6 +84,16 @@ public class ArticleController {
         return ResultMsg.success(savedArticle);
     }
 
+    // 批量上传接口
+    @PostMapping("/batch")
+    public ResultMsg<List<ArticleVO>> createArticles(@RequestBody List<UploadArticleDTO> articleDTOList) {
+        log.info("开始批量创建文章，共 {} 篇", articleDTOList.size());
+
+        List<ArticleVO> voList = articleService.createArticles(articleDTOList);
+
+        return ResultMsg.success(voList);
+    }
+
     /**
      * 文章控制器
      * 提供搜索和详情查询接口
@@ -101,6 +111,21 @@ public class ArticleController {
             return ResultMsg.success(results);
         } catch (Exception e) {
             return ResultMsg.<List<ArticleSearchVO>>error("搜索失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 更新文章
+     */
+    @PutMapping("/{articleId}")
+    public ResultMsg<Void> updateArticle(
+            @PathVariable("articleId") Long articleId,
+            @Valid @RequestBody UpdateArticleDTO dto) {
+        boolean updated = articleService.updateArticle(articleId, dto);
+        if (updated) {
+            return ResultMsg.success("文章更新成功");
+        } else {
+            return ResultMsg.error("文章更新失败或文章不存在");
         }
     }
 }

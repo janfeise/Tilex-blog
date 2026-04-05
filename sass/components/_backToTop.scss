@@ -1,0 +1,38 @@
+@use "../abstracts/" as a;
+
+.back-to-top {
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  z-index: 1000;
+  transition: opacity 0.3s, transform 0.3s;
+
+  &__link {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    background-color: a.$color-primary-gradient-end;
+    color: a.$color-white;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    transition: font-size 0.2s;
+    text-decoration: none;
+    color: currentColor;
+
+    &::before {
+      content: "\2191";
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      font-size: 3.5rem;
+    }
+  }
+}

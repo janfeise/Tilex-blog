@@ -25,6 +25,13 @@ npx vite
 - 数据库打开
 - springboot启动
 
+后台：进入 `Tilex-blog-Admin` 文件夹后启动
+
+```cmd	
+cd .\Tilex-blog-Admin\
+npm run dev
+```
+
 ---
 
 ## 功能概述
@@ -863,3 +870,44 @@ function Navbar({ links }) {
   ]} 
 />
 ```
+
+## 部署
+
+### 压缩后的 JS 文件
+
+#### 文件说明
+
+- `bundle.js` - 所有 JS 文件压缩合并后的单一文件
+	- 大小：约 1MB (压缩前)
+	- 压缩后：约 323KB (gzip)
+	- 包含所有项目 JS 代码和依赖
+
+#### 构建信息
+
+- 构建工具：Vite 5.0.0
+- 压缩工具：Terser
+- 构建时间：2025 年 10 月 25 日
+
+#### 使用方法
+
+在 HTML 文件中引入：
+
+```html
+<script src="dist/bundle.js"></script>
+```
+
+#### 构建命令
+
+```bash
+# 构建JS文件
+npm run build:js
+
+# 构建所有文件（CSS + JS）
+npm run build
+```
+
+#### 注意事项
+
+- 该文件已完全压缩，不建议直接编辑
+- 如需修改代码，请编辑源文件后重新构建
+- 文件包含所有依赖，无需额外引入其他 JS 文件

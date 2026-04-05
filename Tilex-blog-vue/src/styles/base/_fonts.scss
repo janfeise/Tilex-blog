@@ -1,0 +1,18 @@
+// ========================================
+// 字体声明 - 自定义字体导入
+// ========================================
+
+// LongCang 字体（中文艺术字体）
+@font-face {
+  font-family: "LongCang";
+  src: url("../../assets/fonts/LongCang-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// 字体变量
+$font-longcang: "LongCang", sans-serif;
+
+// 注：在 Tilex-blog-vue 的 public 目录中需要放置字体文件
+// 目录结构：public/fonts/LongCang-Regular.ttf

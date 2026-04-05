@@ -6,11 +6,62 @@ body.article .header {
 
 body.article {
   background-color: a.$color-grey-light;
+  padding-bottom: 10rem;
 }
 
 body.article .nav {
   color: a.$color-grey-dark-2;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.4); /* 上方阴影 */
+  background-color: a.$color-grey-light;
+}
+
+.article {
+  &__wrap {
+    display: flex;
+    margin: 5rem 0rem;
+  }
+
+  &__post--container {
+    width: 100vw;
+    flex: 1;
+  }
+
+  &__toc--container {
+    flex: 0 0 20%;
+    position: fixed;
+    max-width: 27rem;
+    min-width: 25rem;
+    top: 20%;
+    right: 4%;
+    padding: 2rem;
+    border-radius: 5px;
+    font-size: a.$font-size-body;
+    background-color: a.$color-white;
+
+    // 定义最大高度，若超出最大高度则：滚动
+    max-height: 65vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* 自定义滚动条样式 */
+
+    & li {
+      padding: 0.5rem 0;
+      list-style: none;
+      color: a.$color-grey-dark-2;
+      border-bottom: 1px solid a.$color-grey-dark-1;
+    }
+
+    & li {
+      a {
+        text-decoration: none; /* 去掉下划线 */
+        color: inherit; /* 避免默认蓝色 */
+      }
+
+      a:hover {
+        color: a.$color-primary;
+      }
+    }
+  }
 }
 
 .post {
@@ -21,6 +72,10 @@ body.article .nav {
   display: flex;
   justify-content: center;
 
+  & img {
+    width: 100%;
+  }
+
   &__title {
   }
 
@@ -29,21 +84,12 @@ body.article .nav {
 
   &__content {
     width: 60%;
-    margin: 5rem 0rem;
-    margin-right: 15rem;
     padding: 3rem 5rem;
+    margin-right: 15rem;
     font-size: a.$font-size-heading;
     border-radius: 1rem;
     background-color: white;
   }
-}
-
-.article__right {
-  position: fixed;
-  top: 30%;
-  right: 10%;
-
-  font-size: a.$font-size-heading;
 }
 
 // 为markdown渲染的表格添加样式

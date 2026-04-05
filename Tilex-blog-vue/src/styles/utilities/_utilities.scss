@@ -1,0 +1,105 @@
+// ========================================
+// 工具类集合
+// ========================================
+@use "../abstracts" as a;
+
+// 间距工具类
+@for $i from 1 through 6 {
+  .m-#{$i * 5} { margin: #{$i * 0.5}rem; }
+  .mt-#{$i * 5} { margin-top: #{$i * 0.5}rem; }
+  .mb-#{$i * 5} { margin-bottom: #{$i * 0.5}rem; }
+  .ml-#{$i * 5} { margin-left: #{$i * 0.5}rem; }
+  .mr-#{$i * 5} { margin-right: #{$i * 0.5}rem; }
+  .p-#{$i * 5} { padding: #{$i * 0.5}rem; }
+  .pt-#{$i * 5} { padding-top: #{$i * 0.5}rem; }
+  .pb-#{$i * 5} { padding-bottom: #{$i * 0.5}rem; }
+  .pl-#{$i * 5} { padding-left: #{$i * 0.5}rem; }
+  .pr-#{$i * 5} { padding-right: #{$i * 0.5}rem; }
+}
+
+// 显示工具类
+.block { display: block; }
+.inline-block { display: inline-block; }
+.inline { display: inline; }
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.grid { display: grid; }
+.none { display: none; }
+
+// 宽度工具类
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.w-1\/2 { width: 50%; }
+.w-1\/3 { width: 33.333%; }
+.w-2\/3 { width: 66.666%; }
+.w-1\/4 { width: 25%; }
+.w-3\/4 { width: 75%; }
+
+// 高度工具类
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+
+// 颜色工具类
+.text-primary { color: a.$color-primary; }
+.text-primary-dark { color: a.$color-primary-dark; }
+.text-grey { color: a.$color-grey-dark; }
+.text-grey-light { color: a.$color-grey; }
+.text-white { color: a.$color-white; }
+
+// 背景颜色工具类
+.bg-primary { background-color: a.$color-primary; }
+.bg-primary-light { background-color: a.$color-primary-light; }
+.bg-white { background-color: a.$color-white; }
+.bg-grey-light { background-color: a.$color-grey-light; }
+.bg-grey { background-color: a.$color-grey; }
+
+// 圆角工具类
+.rounded { border-radius: a.$border-radius-md; }
+.rounded-sm { border-radius: a.$border-radius-sm; }
+.rounded-lg { border-radius: a.$border-radius-lg; }
+.rounded-full { border-radius: 9999px; }
+
+// 阴影工具类
+.shadow-sm { box-shadow: a.$shadow-sm; }
+.shadow { box-shadow: a.$shadow-md; }
+.shadow-lg { box-shadow: a.$shadow-lg; }
+.shadow-none { box-shadow: none; }
+
+// 不透明度工具类
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+// 光标工具类
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+.cursor-not-allowed { cursor: not-allowed; }
+.cursor-move { cursor: move; }
+
+// 边框工具类
+.border { border: 1px solid a.$color-grey; }
+.border-t { border-top: 1px solid a.$color-grey; }
+.border-b { border-bottom: 1px solid a.$color-grey; }
+.border-l { border-left: 1px solid a.$color-grey; }
+.border-r { border-right: 1px solid a.$color-grey; }
+.border-primary { border: 1px solid a.$color-primary; }
+
+// 过渡工具类
+.transition { transition: all a.$transition-normal; }
+.transition-fast { transition: all a.$transition-fast; }
+.transition-slow { transition: all a.$transition-slow; }
+
+// 响应式显示/隐藏
+@media (max-width: a.$breakpoint-tablet) {
+  .tab-hide { display: none; }
+}
+
+@media (max-width: a.$breakpoint-mobile) {
+  .mobile-hide { display: none; }
+}
+
+@media (min-width: a.$breakpoint-desktop) {
+  .desktop-only { display: block; }
+  .mobile-only { display: none; }
+}

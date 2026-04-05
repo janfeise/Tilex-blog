@@ -2,11 +2,22 @@
   "dependencies": {
     "highlight.js": "^11.11.1",
     "marked": "^16.3.0",
+    "postcss": "^8.5.6",
     "sass": "^1.93.2"
   },
   "scripts": {
     "compile:sass": "sass ./sass/main.scss ./css/style.css -w",
     "prefix:css": "postcss ./css/style.css --use autoprefixer -o ./css/style.prefix.css",
-    "build:css": "npm run compile:sass && npm run prefix:css"
+    "minify:css": "postcss ./css/style.prefix.css --use cssnano -o ./css/style.min.css",
+    "build:css": "npm run compile:sass && npm run prefix:css && npm run minify:css",
+    "build:js": "vite build --config vite.config.js",
+    "build": "npm run build:css && npm run build:js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.1",
+    "postcss-cli": "^11.0.1",
+    "vite": "^5.0.0",
+    "terser": "^5.0.0"
   }
 }

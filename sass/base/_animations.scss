@@ -34,3 +34,30 @@
     opacity: 1;
   }
 }
+
+/**
+ * 从当前位置滑出
+*/
+@keyframes slide-down-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+}
+
+/* “slide-left”（向左滑入）动画：
+   元素从右方 5rem 位置逐渐移动到原始位置，同时从透明过渡到不透明 */
+@keyframes slide-left {
+  0% {
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,9 @@
+// ========================================
+// Abstracts 模块导出
+// ========================================
+// 使用 @forward 导出所有工具供其他模块使用
+// 在其他模块中：@use "../abstracts" as a;
+
+@forward "./variables";
+@forward "./functions";
+@forward "./mixins";

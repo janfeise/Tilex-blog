@@ -1,17 +1,7 @@
-<template>
-  <el-container style="height: 100vh;">
-    <!-- 左侧侧边栏 -->
-    <el-aside width="200px">
-      <Sidebar />
-    </el-aside>
+<script setup></script>
 
-    <!-- 右侧内容区 -->
-    <el-main>
-      <router-view />
-    </el-main>
-  </el-container>
+<template>
+  <router-view></router-view>
 </template>
 
-<script setup>
-import Sidebar from './components/Sidebar.vue'
-</script>
+<style scoped></style>

@@ -1,0 +1,82 @@
+// ========================================
+// 首页样式
+// ========================================
+@use "../abstracts" as a;
+
+.home {
+  min-height: 100vh;
+  background-color: a.$color-bg;
+
+  &__side-container {
+    width: 30rem;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    box-shadow: a.$shadow-md;
+    background-color: a.$color-white;
+    z-index: 100;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+
+    &:not(.is-open) {
+      transform: translateX(-100%);
+    }
+  }
+
+  &__main-container {
+    flex: 1;
+    padding: 3rem 4rem;
+    padding-right: 7rem;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+  }
+
+  // 侧边栏展开按钮（独立于容器）
+  &__side-open-btn {
+    position: fixed;
+    left: 5rem;
+    top: 7%;
+    transform: translateY(-50%);
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: a.$color-white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: a.$shadow-md;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 99;
+    padding: 0;
+
+    & svg {
+      width: 2rem;
+      height: 2rem;
+      color: a.$color-primary;
+    }
+
+    &:hover {
+      box-shadow: a.$shadow-lg;
+    }
+  }
+}
+
+.search-btn {
+  position: fixed;
+  right: 1rem;
+  bottom: 7%;
+  transform: translateY(50%);
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+    color: a.$color-primary;
+  }
+}

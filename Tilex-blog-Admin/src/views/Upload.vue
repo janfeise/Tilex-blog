@@ -1,354 +1,214 @@
-<template>
-  <div class="upload-container">
-    <h2>上传文章页面</h2>
+<!-- 上传博客文章的页面 -->
+<script setup>
+import { UploadFilled } from "@element-plus/icons-vue";
 
-    <!-- 文件选择区域 -->
-    <div class="upload-section">
+import { uploadArticles as apiUploadArticles } from "../api/articles";
+
+import { ref } from "vue";
+import { formatTime } from "../utils/formatTime";
+
+// import { UploadProps, UploadUserFile } from "element-plus";
+
+const fileList = ref([]);
+
+const tableData = ref([]);
+
+// 用于存储动态提示信息
+const alerts = ref([]);
+
+const addAlert = (message, type = "success") => {
+  const id = Date.now();
+  alerts.value.push({
+    id,
+    message,
+    type,
+  });
+  // 自动删除
+  setTimeout(() => {
+    alerts.value = alerts.value.filter((a) => a.id !== id);
+  }, 1500);
+};
+
+let uploadTimer = null; // 防抖：计时器需定义在外层
+const handleChange = (_, uploadFiles) => {
+  clearTimeout(uploadTimer);
+
+  uploadTimer = setTimeout(() => {
+    uploadFiles.forEach((file) => {
+      // 判断是否已经上传过（通过 name 或 uid）
+      const exists = fileList.value.some(
+        (f) => f.uid === file.uid || f.name === file.name
+      );
+      if (exists) {
+        addAlert(file.name + "已上传", "error");
+        return;
+      } else {
+        // 新文件加入列表
+        fileList.value.push(file);
+        tableData.value.push({
+          title: file.name,
+          time: formatTime(new Date()),
+        });
+        addAlert(file.name + " 上传成功！");
+      }
+    });
+  }, 100);
+};
+
+/**
+ * 批量上传文章
+ */
+const uploadArticles = async () => {
+  if (fileList.value.length === 0) {
+    addAlert("没有可上传的文件", warning);
+    return;
+  }
+
+  try {
+    // 将上传的文件列表 fileList（文件对象数组）转换成接口需要的格式： { title: String, content: String }[]
+    const articles = await Promise.all(
+      fileList.value.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsText(file.raw); // 读取文本内容
+          reader.onload = () => {
+            resolve({
+              title: file.name,
+              content: reader.result,
+            });
+          };
+          reader.onerror = reject;
+        });
+      })
+    );
+
+    const res = await apiUploadArticles(articles);
+
+    if (res.status === 200) {
+      addAlert("全部文章上传成功");
+      // 情况
+      fileList.value = [];
+      tableData.value = [];
+    } else {
+      addAlert(res.message || "上传失败", "error");
+    }
+  } catch (e) {
+    addAlert(e.message || "上传接口调用失败", "error");
+  }
+};
+
+const handleDelete = function (index) {
+  // 删除 fileList 对应项
+  fileList.value = fileList.value.filter((_, i) => i !== index);
+
+  // 同步删除 tableData 数据
+  tableData.value = tableData.value.filter((_, i) => i !== index);
+};
+</script>
+
+<template>
+  <div class="upload">
+    <div class="alert">
+      <div style="max-width: 600px" class="alert__container">
+        <el-alert
+          v-for="alert in alerts"
+          :key="alert.id"
+          :title="alert.message"
+          :type="alert.type"
+          :closeable="false"
+        />
+      </div>
+    </div>
+
+    <h2 class="upload__title">上传</h2>
+    <div class="upload__container">
       <el-upload
-        :before-upload="beforeUpload"
-        :file-list="fileList"
-        :on-remove="handleRemove"
-        accept=".md"
-        :show-file-list="false"
+        class="upload-demo"
+        stripe
         drag
+        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
         multiple
+        @change="handleChange"
       >
         <el-icon class="el-icon--upload"><upload-filled /></el-icon>
         <div class="el-upload__text">
-          将 Markdown 文件拖到此处，或<em>点击选择文件</em>
+          Drop file here or <em>click to upload</em>
         </div>
-        <template #tip>
-          <div class="el-upload__tip">只能上传 .md 文件</div>
-        </template>
       </el-upload>
     </div>
 
-    <!-- 文章预览区域 -->
-    <div class="preview-section" v-if="articles.length > 0">
-      <h3>文章预览</h3>
-      <div class="article-list">
-        <div
-          v-for="(article, index) in articles"
-          :key="index"
-          class="article-item"
-        >
-          <div class="article-header">
-            <h4>{{ article.title }}</h4>
-            <span class="article-time">{{ article.createdAt }}</span>
-          </div>
-          <div class="article-content">
-            <pre>{{ article.content }}</pre>
-          </div>
-          <div class="article-actions">
+    <!-- 文章列表 -->
+    <div class="articles__table" v-if="tableData.length > 0">
+      <div class="upload__button">
+        <el-button type="primary" @click="uploadArticles">全部上传</el-button>
+      </div>
+      <el-table stripe :data="tableData" style="width: 99%">
+        <el-table-column type="index" label="id" width="100"> </el-table-column>
+        <el-table-column property="title" label="title"> </el-table-column>
+        <el-table-column property="time" label="time"> </el-table-column>
+        <el-table-column label="Operations">
+          <template #default="scope">
             <el-button
-              type="primary"
               size="small"
-              @click="uploadSingleArticle(article, index)"
-              :loading="uploadingIndex === index"
+              @click="handleEdit(scope.$index, scope.row)"
             >
-              上传此文章
+              Edit
             </el-button>
-            <el-button type="danger" size="small" @click="removeArticle(index)">
-              删除
+            <el-button
+              size="small"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)"
+            >
+              Delete
             </el-button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 批量操作 -->
-      <div class="batch-actions">
-        <el-button
-          type="success"
-          @click="uploadAllArticles"
-          :disabled="articles.length === 0"
-          :loading="uploadingAll"
-        >
-          上传所有文章
-        </el-button>
-        <el-button
-          type="info"
-          @click="clearAllArticles"
-          :disabled="articles.length === 0"
-        >
-          清空列表
-        </el-button>
-      </div>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { ElMessage } from "element-plus";
-import { UploadFilled } from "@element-plus/icons-vue";
-import { uploadArticle } from "../utils/api.js";
-import { formatDate } from "../utils/date.js";
-
-const fileList = ref([]); // 存储选择的文件
-const articles = ref([]); // 存储解析后的文章数据
-const uploadingIndex = ref(-1); // 当前正在上传的文章索引
-const uploadingAll = ref(false); // 是否正在批量上传
-
-// 选择文件时调用，阻止自动上传
-const beforeUpload = (file) => {
-  // 检查文件类型
-  if (!file.name.toLowerCase().endsWith(".md")) {
-    ElMessage.error("只能上传 .md 文件");
-    return false;
-  }
-
-  // 读取文件内容
-  readFileContent(file);
-  return false;
-};
-
-// 读取文件内容并解析
-const readFileContent = (file) => {
-  const reader = new FileReader();
-
-  reader.onload = (e) => {
-    const content = e.target.result;
-    const title = extractTitle(content, file.name);
-    const createdAt = formatDate(new Date(), "YYYY-MM-DD HH:mm:ss");
-
-    const article = {
-      title,
-      content,
-      createdAt,
-      fileName: file.name,
-      file: file,
-    };
-
-    articles.value.push(article);
-    ElMessage.success(`文件 "${file.name}" 解析成功`);
-  };
-
-  reader.onerror = () => {
-    ElMessage.error(`读取文件 "${file.name}" 失败`);
-  };
-
-  reader.readAsText(file, "UTF-8");
-};
-
-// 提取标题
-const extractTitle = (content, fileName) => {
-  const lines = content.split("\n");
-
-  // 查找第一个以 # 开头的行作为标题
-  for (const line of lines) {
-    const trimmedLine = line.trim();
-    if (trimmedLine.startsWith("#")) {
-      // 移除 # 号和空格，返回标题
-      return trimmedLine.replace(/^#+\s*/, "");
-    }
-  }
-
-  // 如果没有找到标题，使用文件名（去掉扩展名）
-  return fileName.replace(/\.md$/i, "");
-};
-
-// 移除文件
-const handleRemove = (file, fileListArg) => {
-  fileList.value = [...fileListArg];
-};
-
-// 移除文章
-const removeArticle = (index) => {
-  articles.value.splice(index, 1);
-  ElMessage.success("文章已删除");
-};
-
-// 上传单篇文章
-const uploadSingleArticle = async (article, index) => {
-  uploadingIndex.value = index;
-
-  try {
-    const response = await uploadArticle({
-      title: article.title,
-      content: article.content,
-      createdAt: article.createdAt,
-    });
-
-    ElMessage.success(`文章 "${article.title}" 上传成功`);
-    articles.value.splice(index, 1);
-  } catch (error) {
-    console.error("上传失败:", error);
-    ElMessage.error(`文章 "${article.title}" 上传失败`);
-  } finally {
-    uploadingIndex.value = -1;
-  }
-};
-
-// 批量上传所有文章
-const uploadAllArticles = async () => {
-  uploadingAll.value = true;
-  let successCount = 0;
-  let failCount = 0;
-
-  for (let i = articles.value.length - 1; i >= 0; i--) {
-    try {
-      const article = articles.value[i];
-      await uploadArticle({
-        title: article.title,
-        content: article.content,
-        createdAt: article.createdAt,
-      });
-
-      articles.value.splice(i, 1);
-      successCount++;
-    } catch (error) {
-      console.error("上传失败:", error);
-      failCount++;
-    }
-  }
-
-  uploadingAll.value = false;
-
-  if (successCount > 0) {
-    ElMessage.success(`成功上传 ${successCount} 篇文章`);
-  }
-  if (failCount > 0) {
-    ElMessage.error(`${failCount} 篇文章上传失败`);
-  }
-};
-
-// 清空所有文章
-const clearAllArticles = () => {
-  articles.value = [];
-  ElMessage.success("已清空文章列表");
-};
-</script>
-
 <style scoped>
-.upload-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+.el-alert {
+  margin: 20px 0 0;
 }
-
-.upload-section {
-  margin-bottom: 30px;
-}
-
-.preview-section {
-  margin-top: 30px;
-}
-
-.article-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.article-item {
-  border: 1px solid #e4e7ed;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: #fafafa;
-  transition: all 0.3s ease;
-}
-
-.article-item:hover {
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  border-color: #409eff;
-}
-
-.article-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e4e7ed;
-}
-
-.article-header h4 {
+.el-alert:first-child {
   margin: 0;
-  color: #303133;
-  font-size: 18px;
-  font-weight: 600;
 }
 
-.article-time {
-  color: #909399;
-  font-size: 14px;
-}
-
-.article-content {
-  margin-bottom: 15px;
-}
-
-.article-content pre {
-  background-color: #f5f7fa;
-  border: 1px solid #e4e7ed;
-  border-radius: 4px;
-  padding: 15px;
-  margin: 0;
-  font-family: "Courier New", monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #606266;
-  max-height: 200px;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-.article-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.batch-actions {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  padding: 20px;
-  border-top: 1px solid #e4e7ed;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-}
-
-/* Element Plus 上传组件样式调整 */
-:deep(.el-upload-dragger) {
+.alert {
   width: 100%;
-  height: 180px;
-  border: 2px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 2rem;
+  padding-left: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
-:deep(.el-upload-dragger:hover) {
-  border-color: #409eff;
+.alert__container {
+  min-width: 600px;
 }
 
-:deep(.el-icon--upload) {
-  font-size: 67px;
-  color: #c0c4cc;
-  margin: 40px 0 16px;
-  line-height: 50px;
+.upload {
+  padding: 2rem;
+  padding-bottom: 10rem;
 }
 
-:deep(.el-upload__text) {
-  color: #606266;
-  font-size: 14px;
-  text-align: center;
+.upload__title {
+  margin-bottom: 2rem;
 }
 
-:deep(.el-upload__text em) {
-  color: #409eff;
-  font-style: normal;
+.upload__button {
+  text-align: right;
+  margin-bottom: 1rem;
 }
 
-:deep(.el-upload__tip) {
-  font-size: 12px;
-  color: #909399;
-  margin-top: 7px;
-  text-align: center;
+.articles__table {
+  padding-top: 1rem;
 }
 </style>

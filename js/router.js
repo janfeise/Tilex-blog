@@ -6,14 +6,17 @@
  * 2. 使用现有的 loadComponents 工具函数来加载组件
  * 3. 自动识别当前页面路径并加载对应组件
  */
-import { articleContainer } from "./dom/articlDom.js";
+import { articleContainer, tocContainer } from "./dom/articlDom.js";
 import { articleSearchContainer, blogWrapper } from "./dom/blogDom.js";
+import { backToTopContainer } from "./dom/commonDom.js";
 import { headerSeasonsContainer, headerNavContainer } from "./dom/headerDom.js";
 import { initSeasons } from "./components/seasons.js";
 import { initNav } from "./components/nav.js";
-import { articleSearch, initBlog } from "./pages/blog.js";
+import { initBlog } from "./pages/blog/blog.js";
 import { loadComponents } from "./utils/loadComponent.js";
-import { initArticle } from "./pages/article.js";
+import { initArticle, initToc } from "./pages/article/article.js";
+import { initArticleSearch } from "./pages/blog/components/article-search.js";
+import { initBackToTop } from "./components/backToTop.js";
 
 /**
  * 公共组件配置（所有页面都需要的组件）
@@ -23,6 +26,11 @@ const commonComponents = [
     container: headerNavContainer,
     name: "nav",
     initFuc: initNav,
+  },
+  {
+    container: backToTopContainer,
+    name: "backToTop",
+    initFuc: initBackToTop,
   },
 ];
 
@@ -49,7 +57,7 @@ const pageSpecificComponents = {
     {
       container: articleSearchContainer,
       name: "article-search",
-      initFuc: articleSearch,
+      initFuc: initArticleSearch,
     },
   ],
 
@@ -59,7 +67,14 @@ const pageSpecificComponents = {
       name: "article-detail",
       initFuc: initArticle,
     },
+    {
+      container: tocContainer,
+      name: "article-toc",
+      initFuc: initToc,
+    },
   ],
+
+  "/pages/Gallery.html": [],
 };
 
 /**
@@ -96,7 +111,7 @@ export function loadPageComponents() {
   // 如果没有精确匹配，使用默认配置
   if (!pageSpecificComponents[currentPath] && currentPath !== "/") {
     console.warn(
-      `No specific configuration for path: ${currentPath}, using common components only`
+      `No specific configuration for path: ${currentPath}, using common components only`,
     );
     componentConfigs = commonComponents;
   }

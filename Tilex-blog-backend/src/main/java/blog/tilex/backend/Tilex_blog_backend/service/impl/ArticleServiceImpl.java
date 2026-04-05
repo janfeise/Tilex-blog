@@ -1,10 +1,7 @@
 package blog.tilex.backend.Tilex_blog_backend.service.impl;
 
 import blog.tilex.backend.Tilex_blog_backend.dao.PostDao;
-import blog.tilex.backend.Tilex_blog_backend.dto.ArticleQueryDTO;
-import blog.tilex.backend.Tilex_blog_backend.dto.ArticleSearchVO;
-import blog.tilex.backend.Tilex_blog_backend.dto.ArticleVO;
-import blog.tilex.backend.Tilex_blog_backend.dto.UploadArticleDTO;
+import blog.tilex.backend.Tilex_blog_backend.dto.*;
 import blog.tilex.backend.Tilex_blog_backend.entity.Post;
 import blog.tilex.backend.Tilex_blog_backend.service.ArticleService;
 import blog.tilex.backend.Tilex_blog_backend.utils.PageResult;
@@ -33,11 +30,11 @@ public class ArticleServiceImpl implements ArticleService {
     // ==================== 配置参数 ====================
 
     /** 高亮HTML标签 */
-    private static final String HIGHLIGHT_PREFIX = "<span class='highlight'>";
+    private static final String HIGHLIGHT_PREFIX = "<span class='markdown-highlight'>";
     private static final String HIGHLIGHT_SUFFIX = "</span>";
 
     /** 每个片段包含的上下文字符数 */
-    private static final int SNIPPET_CONTEXT_LENGTH = 60;
+    private static final int SNIPPET_CONTEXT_LENGTH = 20;
 
     /** 最多返回的片段数量 */
     private static final int MAX_SNIPPETS = 5;
@@ -188,6 +185,18 @@ public class ArticleServiceImpl implements ArticleService {
 
 
         return vo;
+    }
+
+    // 批量上传文章
+    public List<ArticleVO> createArticles(List<UploadArticleDTO> uploadArticleDTOList) {
+        List<ArticleVO> voList = new ArrayList<>();
+
+        for (UploadArticleDTO dto : uploadArticleDTOList) {
+            ArticleVO vo = createArticle(dto); // 循环调用单篇逻辑
+            voList.add(vo);
+        }
+
+        return voList;
     }
 
     // ==================== 公共方法 ====================
@@ -376,5 +385,15 @@ public class ArticleServiceImpl implements ArticleService {
             return false;
         }
         return text.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    public boolean updateArticle(Long articleId, UpdateArticleDTO dto) {
+        Post post = new Post();
+        post.setId(Math.toIntExact(articleId));
+        post.setTitle(dto.getTitle());
+        post.setContent(dto.getContent());
+        post.setUpdatedAt(java.time.LocalDateTime.now());
+        int rows = postDao.update(post);
+        return rows > 0;  // 返回是否更新成功
     }
 }

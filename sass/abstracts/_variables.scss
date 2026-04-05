@@ -1,6 +1,14 @@
-// 主题色
-$color-primary: skyblue;
+// 主色调
+$color-primary: #87ceeb;
 
+// 派生色
+$color-primary-light: #b9e6fa;
+$color-primary-dark: #4aa3c2;
+
+// 可选：用于渐变、hover、禁用状态
+$color-primary-gradient-start: #a3dbf3;
+$color-primary-gradient-end: #a3dbf3;
+$color-primary-disabled: #c3e8ef;
 // 灰色
 $color-white: white;
 $color-bg: #f1f1f1;

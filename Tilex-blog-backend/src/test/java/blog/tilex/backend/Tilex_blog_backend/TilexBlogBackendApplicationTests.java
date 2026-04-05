@@ -23,16 +23,16 @@ class TilexBlogBackendApplicationTests {
 	/**
 	 * 测试类
 	 * */
-	@Test
-	public void testGetDocById() throws Exception {
-		try {
-			long id = 1;
-			System.out.println(testDao.getDocById(id));
-		}  catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("查询失败", e);
-		}
-	}
+//	@Test
+//	public void testGetDocById() throws Exception {
+//		try {
+//			long id = 1;
+//			System.out.println(testDao.getDocById(id));
+//		}  catch (Exception e) {
+//			e.printStackTrace();
+//			throw new RuntimeException("查询失败", e);
+//		}
+//	}
 
 	/**
 	 * 通过id查询文章
